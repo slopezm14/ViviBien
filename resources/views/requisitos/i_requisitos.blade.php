@@ -13,10 +13,10 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                 {!!Form::open(['route'=>'requisito.store','id'=>'contact', 'method'=>'POST'])!!} 
 
                     {!!Form::label('Id. Tipo de Ingreso')!!}
-                    {!!Form::select('id_tipo_ingreso', ['01'=>'Tipo1','02'=>'Tipo2','03'=>'Tipo3'], null, ['class' => 'form-control']) !!}
+                    {!!Form::select('id_tipo_ingreso', $tipoingreso, null, ['class' => 'form-control']) !!}
 
                     {!!Form::label('Descripción del Requisito')!!}
                     {!!Form::text('descripcion_requisito', null,['class'=>'form-control', 'placeholder'=>'Descripción del Requisito'])!!}
@@ -26,12 +26,11 @@
                     {!!Form::text('observaciones', null,['class'=>'form-control', 'placeholder'=>'Observaciones'])!!}
 
                     {!!Form::label('Obligatorio')!!}
-                    {!!Form::checkbox('si', 'si')!!}
-                    {!!Form::checkbox('no', 'no')!!}
+                    {!!Form::select('obligatorio', ['S'=>'SI','N'=>'NO'], null, ['class' => 'form-control']) !!}
                     
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

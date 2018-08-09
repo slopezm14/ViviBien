@@ -13,7 +13,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                 {!!Form::open(['route'=>'tipoaccion.store','id'=>'contact', 'method'=>'POST'])!!} 
 
 
 

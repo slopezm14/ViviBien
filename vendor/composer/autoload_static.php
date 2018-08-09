@@ -3579,6 +3579,7 @@ class ComposerStaticInitd8aa52c8b8ddb47d556be2654b38985c
         'ViviBien\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'ViviBien\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'ViviBien\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'ViviBien\\Http\\Controllers\\DepartamentoController' => __DIR__ . '/../..' . '/app/Http/Controllers/DepartamentoController.php',
         'ViviBien\\Http\\Controllers\\ViewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ViewsController.php',
         'ViviBien\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'ViviBien\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -23,7 +23,7 @@ class GeneroController extends Controller
      */
     public function create()
     {
-        //
+        return view('genero.i_Genero');
     }
 
     /**
@@ -34,7 +34,9 @@ class GeneroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \ViviBien\genero::create([
+            'descripcion_genero'=>$request['genero'],
+        ]);
     }
 
     /**

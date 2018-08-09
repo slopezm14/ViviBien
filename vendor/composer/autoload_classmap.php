@@ -3263,6 +3263,7 @@ return array(
     'ViviBien\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'ViviBien\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'ViviBien\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'ViviBien\\Http\\Controllers\\DepartamentoController' => $baseDir . '/app/Http/Controllers/DepartamentoController.php',
     'ViviBien\\Http\\Controllers\\ViewsController' => $baseDir . '/app/Http/Controllers/ViewsController.php',
     'ViviBien\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'ViviBien\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',

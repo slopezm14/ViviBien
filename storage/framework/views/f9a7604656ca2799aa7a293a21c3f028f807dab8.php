@@ -11,7 +11,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 
+                 <?php echo Form::open(['route'=>'unidadtrabajo.store','id'=>'contact', 'method'=>'POST']); ?> 
 
         
                     <?php echo Form::label('Unidad de Trabajo'); ?>
@@ -23,7 +23,7 @@
 
                     <br>
                     <?php echo Form::submit('Registrar',['class'=>'btn btn-primary']); ?> 
-                
+                <?php echo Form::close(); ?> 
             </div>
         </div>
     </div>

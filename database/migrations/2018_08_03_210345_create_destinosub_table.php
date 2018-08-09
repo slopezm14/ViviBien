@@ -14,8 +14,8 @@ class CreateDestinosubTable extends Migration
     public function up()
     {
         Schema::create('tb_cat_destino_subsidio', function (Blueprint $table) {
-            $table->increments('id_tipo_ingreso');
-            $table->string('descripcion_ingreso',100);
+            $table->increments('id_tipo_solicitud_subsidio');
+            $table->string('descripcion',100);
             $table->timestamps();
         });
     }

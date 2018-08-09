@@ -23,7 +23,7 @@ class TelefonosController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

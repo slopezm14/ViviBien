@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace ViviBien;
 
 use Illuminate\Database\Eloquent\Model;
 

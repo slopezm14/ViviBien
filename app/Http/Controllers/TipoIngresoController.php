@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\tipo_ingreso;
+
 
 class TipoIngresoController extends Controller
 {
@@ -23,7 +27,7 @@ class TipoIngresoController extends Controller
      */
     public function create()
     {
-        //
+        return view('tipo_ingreso.i_tipo_ingreso');
     }
 
     /**
@@ -34,7 +38,10 @@ class TipoIngresoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     
+        \ViviBien\tipo_ingreso::create([
+            'descripcion_ingreso'=>$request['descripcion_ingreso'],
+        ]);
     }
 
     /**

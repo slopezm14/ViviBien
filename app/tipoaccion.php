@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace ViviBien;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +10,7 @@ class tipoaccion extends Model
 
     protected $primaryKey = 'id_accion';
 
-    protected $fillable = ['descripcion_accioin'];
+    protected $fillable = ['descripcion_accion'];
 
     public $timestamps = true;
 

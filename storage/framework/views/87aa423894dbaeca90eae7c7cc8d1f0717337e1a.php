@@ -2,7 +2,7 @@
 
 <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">CREAR TIPOS DE TELEFONO</h1>
+            <h1 class="page-header">Municipios</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -11,11 +11,11 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 
+                 <?php echo Form::open(['route'=>'municipio.store','id'=>'contact', 'method'=>'POST']); ?> 
 
                     <?php echo Form::label('Departamento'); ?>
 
-                    <?php echo Form::select('id_departamento', ['01'=>'Jutiapa','02'=>'Jalapa','03'=>'Santa Rosa'], null, ['class' => 'form-control']); ?>
+                    <?php echo Form::select('id_departamento', $departamentos, null, ['class' => 'form-control']); ?>
 
                     <br>
                     <?php echo Form::label('Descripción del Municipio'); ?>
@@ -27,7 +27,7 @@
                     
                     <br>
                     <?php echo Form::submit('Registrar',['class'=>'btn btn-primary']); ?> 
-                
+                <?php echo Form::close(); ?> 
             </div>
         </div>
     </div>

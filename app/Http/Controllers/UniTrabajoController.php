@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\unidad_trabajo;
 
 class UniTrabajoController extends Controller
 {
@@ -23,7 +26,7 @@ class UniTrabajoController extends Controller
      */
     public function create()
     {
-        //
+        return view('unidad_trabajo.i_unidad');
     }
 
     /**
@@ -34,7 +37,9 @@ class UniTrabajoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \ViviBien\unidad_trabajo::create([
+            'descripcion_unidad'=>$request['descripcion_unidad'],
+        ]);
     }
 
     /**

@@ -13,7 +13,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                 {!!Form::open(['route'=>'unidadtrabajo.store','id'=>'contact', 'method'=>'POST'])!!} 
 
         
                     {!!Form::label('Unidad de Trabajo')!!}
@@ -22,7 +22,7 @@
 
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

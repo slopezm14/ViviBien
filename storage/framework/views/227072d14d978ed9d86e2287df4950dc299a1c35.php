@@ -11,28 +11,16 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 
+                 <?php echo Form::open(['route'=>'proyecto.store','id'=>'contact', 'method'=>'POST']); ?> 
 
                     <?php echo Form::label('Municipio del Proyecto'); ?>
 
-                    <?php echo Form::select('id_municipio_proyecto', ['01'=>'Jutiapa','02'=>'El Progreso','03'=>'San José Acatempa'], null, ['class' => 'form-control']); ?>
+                    <?php echo Form::select('id_municipio_proyecto', $municipios, null, ['class' => 'form-control']); ?>
 
                     
                     <?php echo Form::label('Desarrollador'); ?>
 
-                    <?php echo Form::select('id_desarrollador', ['01'=>'Desarrollador1','02'=>'Desarrollador2','03'=>'Desarrollador3'], null, ['class' => 'form-control']); ?>
-
-                    
-                    <?php echo Form::label('Departamento'); ?>
-
-                    <?php echo Form::select('id_departamento', ['01'=>'Jutiapa','02'=>'Jalapa','03'=>'Santa Rosa'], null, ['class' => 'form-control']); ?>
-
-
-                    <?php echo Form::label('Nombre del Proyecto'); ?>
-
-                    <?php echo Form::text('nombre_proyecto', null,['class'=>'form-control', 'placeholder'=>'Nombre del Proyecto']); ?>
-
-                    <?php echo $errors->first('nombre_proyecto','<span class="help-block">:message</span>'); ?>
+                    <?php echo Form::select('id_desarrollador', $desarrollador, null, ['class' => 'form-control']); ?>
 
                     
                     <?php echo Form::label('Nombre del Proyecto'); ?>
@@ -41,7 +29,7 @@
 
                     <?php echo $errors->first('nombre_proyecto','<span class="help-block">:message</span>'); ?>
 
-
+                    
                     <?php echo Form::label('Longitud del Proyecto'); ?>
 
                     <?php echo Form::number('longitud_proyecto', null,['class'=>'form-control', 'placeholder'=>'Longitud del Proyecto']); ?>
@@ -72,7 +60,7 @@
 
                     <br>
                     <?php echo Form::submit('Registrar',['class'=>'btn btn-primary']); ?> 
-                
+                <?php echo Form::close(); ?> 
             </div>
         </div>
     </div>

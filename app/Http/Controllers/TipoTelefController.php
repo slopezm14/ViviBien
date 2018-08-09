@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\tipostelefono;
 
 class TipoTelefController extends Controller
 {
@@ -23,7 +26,7 @@ class TipoTelefController extends Controller
      */
     public function create()
     {
-        //
+        return view('tipo_telefono.i_tipoTelefono');
     }
 
     /**
@@ -34,7 +37,9 @@ class TipoTelefController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \ViviBien\tipostelefono::create([
+            'descripcion_tipotelefono'=>$request['tipo_telefono'],
+        ]);
     }
 
     /**

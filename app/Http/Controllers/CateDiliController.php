@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\categoriadili;
+use ViviBien\unidad_trabajo;
 
 class CateDiliController extends Controller
 {
@@ -23,7 +27,8 @@ class CateDiliController extends Controller
      */
     public function create()
     {
-        //
+        $unidad = unidad_trabajo::pluck('descripcion_unidad','id_unidad_trabajo');
+        return view('cat_diligencias.i_cat_dili', compact('unidad'));
     }
 
     /**
@@ -34,7 +39,13 @@ class CateDiliController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \ViviBien\categoriadili::create([
+            'id_unidad_trabajo'=>$request['id_unidad_trabajo'],
+            'descripcion_diligencia'=>$request['descripcion_diligencia'],
+            'obligatoria'=>$request['obligatorio'],
+            'orden'=>$request['orden'],
+            
+        ]);
     }
 
     /**

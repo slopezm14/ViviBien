@@ -13,14 +13,14 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-            {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!} --}}
+            {!!Form::open(['route'=>'destinosub.store','id'=>'contact', 'method'=>'POST'])!!}
                     {!!Form::label('Descripción del Tipo de Subsidio')!!}
                     {!!Form::text('descripcion', null,['class'=>'form-control', 'placeholder'=>'Descripción del Tipo de Subsidio'])!!}
                     {!! $errors->first('descripcion','<span class="help-block">:message</span>') !!}
                     
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-               {{-- {!!Form::close()!!} --}}  
+               {!!Form::close()!!}  
             </div>
         </div>
     </div>

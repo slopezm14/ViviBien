@@ -4,7 +4,7 @@
 
 <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Municipios</h1>
+            <h1 class="page-header">Desarrollador</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -13,7 +13,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                 {!!Form::open(['route'=>'desarrollador.store','id'=>'contact', 'method'=>'POST'])!!} 
 
                     {!!Form::label('Nombre del Desarrollador')!!}
                     {!!Form::text('nombre_desarrollador', null,['class'=>'form-control', 'placeholder'=>'Nombre del Desarrollador'])!!}
@@ -31,21 +31,25 @@
                     {!!Form::email('correo_electronico',null, ['class'=>'form-control', 'placeholder'=>'Correo Electronico'] )!!}
                     {!! $errors->first('correo_electronico','<span class="help-block">:message</span>') !!}
 
+                    {!!Form::label('Dueño')!!}
+                    {!!Form::text('nombre_owner',null, ['class'=>'form-control', 'placeholder'=>'Nombre del Dueño'] )!!}
+                    {!! $errors->first('nombre_owner','<span class="help-block">:message</span>') !!}
+
                      {!!Form::label('Telefono1')!!}
-                    {!!Form::text('Num_Tel',null, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 1'] )!!}
-                    {!! $errors->first('Num_Tel','<span class="help-block">:message</span>') !!}
+                    {!!Form::text('Num_Tel1',null, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 1'] )!!}
+                    {!! $errors->first('Num_Tel1','<span class="help-block">:message</span>') !!}
 
                         {!!Form::label('Telefono2')!!}
                     {!!Form::text('Num_Tel2',null, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 2'] )!!}
-                    {!! $errors->first('Num_Tel','<span class="help-block">:message</span>') !!}
+                    {!! $errors->first('Num_Tel2','<span class="help-block">:message</span>') !!}
 
                         {!!Form::label('Telefono3')!!}
                     {!!Form::text('Num_Tel3',null, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 3'] )!!}
-                    {!! $errors->first('Num_Tel','<span class="help-block">:message</span>') !!}
+                    {!! $errors->first('Num_Tel3','<span class="help-block">:message</span>') !!}
             
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

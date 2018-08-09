@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\relacion_familiar;
 
 class RelacionFamController extends Controller
 {
@@ -23,7 +26,7 @@ class RelacionFamController extends Controller
      */
     public function create()
     {
-        //
+        return view('cat_relacion_familiar.i_relacion');
     }
 
     /**
@@ -34,7 +37,9 @@ class RelacionFamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \ViviBien\relacion_familiar::create([
+            'descripcion'=>$request['descripcion'],
+        ]);
     }
 
     /**

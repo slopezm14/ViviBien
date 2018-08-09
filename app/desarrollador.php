@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace ViviBien;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +10,7 @@ class desarrollador extends Model
 
     protected $primaryKey = 'id_desarrollador';
 
-    protected $fillable = ['nombre_desarrollador','nit','direccion_empresa','correo_electronico','telefono'];
+    protected $fillable = ['nombre_desarrollador','nit','direccion_empresa','correo_electronico','nombre_owner'];
 
     public $timestamps = true;
 

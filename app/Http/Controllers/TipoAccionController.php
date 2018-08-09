@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\tipoaccion;
 
 class TipoAccionController extends Controller
 {
@@ -23,7 +26,7 @@ class TipoAccionController extends Controller
      */
     public function create()
     {
-        //
+        return view('tipoAccion.i_tipo_accion');
     }
 
     /**
@@ -34,7 +37,9 @@ class TipoAccionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \ViviBien\tipoaccion::create([
+            'descripcion_accion'=>$request['descripAccion'],
+        ]);
     }
 
     /**

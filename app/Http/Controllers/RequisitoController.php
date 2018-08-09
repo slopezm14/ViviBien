@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\requisito;
+use ViviBien\tipo_ingreso;
 
 class RequisitoController extends Controller
 {
@@ -23,7 +27,8 @@ class RequisitoController extends Controller
      */
     public function create()
     {
-        //
+        $tipoingreso = tipo_ingreso::pluck('descripcion_ingreso','id_tipo_ingreso');
+        return view('requisitos.i_requisitos', compact('tipoingreso'));
     }
 
     /**
@@ -34,7 +39,12 @@ class RequisitoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \ViviBien\requisito::create([
+            'id_tipo_ingreso'=>$request['id_tipo_ingreso'],
+            'descripcion_requisito'=>$request['descripcion_requisito'],
+            'observaciones'=>$request['observaciones'],
+            'obligatorio'=>$request['obligatorio'],
+        ]);
     }
 
     /**

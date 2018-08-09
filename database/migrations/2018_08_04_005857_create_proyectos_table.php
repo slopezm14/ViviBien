@@ -18,9 +18,7 @@ class CreateProyectosTable extends Migration
             $table->integer('id_municipio')->unsigned()->index()->nullable();
             $table->foreign('id_municipio')->references('id_municipio')->on('tb_cat_municipios');
             $table->integer('id_desarrollador')->unsigned()->index()->nullable();
-            $table->foreign('id_desarrollador')->references('id_desarrollador')->on('tb_desarrolladores');
-            $table->integer('id_departamento')->unsigned()->index()->nullable();
-            $table->foreign('id_departamento')->references('id_departamento')->on('tb_cat_departamento');
+            $table->foreign('id_desarrollador')->references('id_desarrollador')->on('tb_desarrolladores'); 
             $table->string('nombre_proyecto',200);
             $table->float('longitud_proyecto', 8, 2);
             $table->float('latitud_proyecto', 8, 2);

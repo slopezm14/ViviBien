@@ -13,10 +13,10 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                 {!!Form::open(['route'=>'municipio.store','id'=>'contact', 'method'=>'POST'])!!} 
 
                     {!!Form::label('Departamento')!!}
-                    {!!Form::select('id_departamento', ['01'=>'Jutiapa','02'=>'Jalapa','03'=>'Santa Rosa'], null, ['class' => 'form-control']) !!}
+                    {!!Form::select('id_departamento', $departamentos, null, ['class' => 'form-control']) !!}
                     <br>
                     {!!Form::label('Descripción del Municipio')!!}
                     {!!Form::text('descripcion_municipio', null,['class'=>'form-control', 'placeholder'=>'Descripción del Municipio'])!!}
@@ -24,7 +24,7 @@
                     
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

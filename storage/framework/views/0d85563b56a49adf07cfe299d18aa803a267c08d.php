@@ -11,7 +11,8 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 <?php echo Form::open(['route'=>'departamento.store','id'=>'contact', 'method'=>'POST']); ?> 
+                 <?php echo Form::open(['route'=>'departamento.store','id'=>'contact', 'method'=>'POST']); ?>
+
                     <?php echo Form::label('Descripción del Departamento'); ?>
 
                     <?php echo Form::text('descripcion_departamento', null,['class'=>'form-control', 'placeholder'=>'Descripción del Departamento']); ?>
@@ -21,7 +22,8 @@
                     
                     <br>
                     <?php echo Form::submit('Registrar',['class'=>'btn btn-primary']); ?> 
-                <?php echo Form::close(); ?> 
+                <?php echo Form::close(); ?>
+
             </div>
         </div>
     </div>

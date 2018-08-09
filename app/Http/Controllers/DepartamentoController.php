@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\cat_departamento;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\cat_departamento;
 
 class DepartamentoController extends Controller
 {
@@ -14,7 +16,7 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -24,7 +26,7 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        
+        return view('cat_departamento.i_departamento');
     }
 
     /**
@@ -36,7 +38,7 @@ class DepartamentoController extends Controller
     public function store(Request $request)
     {
         
-        \App\cat_departamento::create([
+        \ViviBien\cat_departamento::create([
             'descripcion_departamento'=>$request['descripcion_departamento'],
         ]);
 

@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\destino_subsidio;
 
 use Illuminate\Http\Request;
 
@@ -23,7 +26,7 @@ class DestinoSubController extends Controller
      */
     public function create()
     {
-        //
+        return view('cat_destino_sub.i_destino_sub');
     }
 
     /**
@@ -34,7 +37,9 @@ class DestinoSubController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \ViviBien\destino_subsidio::create([
+            'descripcion'=>$request['descripcion'],
+        ]);
     }
 
     /**

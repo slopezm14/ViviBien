@@ -13,7 +13,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                 {!!Form::open(['route'=>'rol.store','id'=>'contact', 'method'=>'POST'])!!} 
                  
                  {!!Form::label('Short desc')!!}
                     {!!Form::text('short_desc', null,['class'=>'form-control', 'placeholder'=>'Descripcion corta'])!!}
@@ -25,7 +25,7 @@
                     
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

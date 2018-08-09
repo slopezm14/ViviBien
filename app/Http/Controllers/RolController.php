@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\roles;
 
 class RolController extends Controller
 {
@@ -23,7 +26,7 @@ class RolController extends Controller
      */
     public function create()
     {
-        //
+        return view('roles.i_roles');
     }
 
     /**
@@ -34,7 +37,10 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \ViviBien\roles::create([
+            'descripcion_rol'=>$request['descripcion_rol'],
+            'short_desc'=>$request['short_desc'],
+        ]);
     }
 
     /**

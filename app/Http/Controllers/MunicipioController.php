@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use ViviBien\cat_departamento;
+use ViviBien\cat_municipio;
 
 class MunicipioController extends Controller
 {
@@ -23,7 +27,11 @@ class MunicipioController extends Controller
      */
     public function create()
     {
-        //
+        $departamentos = cat_departamento::pluck('descripcion_departamento','id_departamento'); 
+
+        
+        return view('cat_municipios.i_municipio', array('departamentos'=> $departamentos));
+
     }
 
     /**
@@ -34,7 +42,11 @@ class MunicipioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \ViviBien\cat_municipio::create([
+            'descripcion_municipio'=>$request['descripcion_municipio'],
+            'id_departamento'=>$request['id_departamento'],
+        ]);
+
     }
 
     /**
@@ -45,7 +57,7 @@ class MunicipioController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
