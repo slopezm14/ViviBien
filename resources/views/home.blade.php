@@ -31,6 +31,12 @@
                         </a>
                     </div>
                 </div>
+                {{-- @forelse($municipios as $m)
+            <p>{{$m->name}}</p>
+                @empty
+
+                @endforelse --}}
+                @hasanyrole('Social|Financiero|Juridico')
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-green">
                         <div class="panel-heading">
@@ -39,12 +45,12 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
+                                    <div class="huge">{{$conteo}}</div>
                                     <div>Aprobacion</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                    <a href="{{route('chose')}}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -53,6 +59,7 @@
                         </a>
                     </div>
                 </div>
+                @endhasanyrole
             </div>
 
 

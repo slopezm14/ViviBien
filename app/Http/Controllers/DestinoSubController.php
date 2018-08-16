@@ -4,11 +4,16 @@ namespace ViviBien\Http\Controllers;
 use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\destino_subsidio;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
 class DestinoSubController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,12 @@ class DestinoSubController extends Controller
      */
     public function index()
     {
-        //
+        $destinos = DB::table('tb_cat_destino_subsidio as t')
+        ->select('t.id_tipo_solicitud_subsidio','t.descripcion')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('cat_destino.d_destino_sub', array('destinos'=> $destinos));
     }
 
     /**
@@ -61,7 +71,10 @@ class DestinoSubController extends Controller
      */
     public function edit($id)
     {
-        //
+        $destinos = DB::table('tb_cat_destino_subsidio')->where('id_tipo_solicitud_subsidio', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('cat_ddestino_sub.u_destino_sub',['destinos'=>$destinos]);
     }
 
     /**
@@ -73,7 +86,8 @@ class DestinoSubController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_cat_destino_subsidio')->where('id_tipo_solicitud_subsidio', $id)->limit(1)
+        ->update(array('descripcion'=>$request['descripcion']));
     }
 
     /**

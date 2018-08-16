@@ -60,16 +60,22 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                    <?php if(auth()->check() && auth()->user()->hasAnyRole('Social|Superusuario|Financiero|Juridico')): ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
+                    
+                                
+                                
+                             
                     <ul class="dropdown-menu dropdown-messages">
                         <!--
                             MESSAGES HERE
                             __________
                          -->
                         <li class="divider"></li>
+                        
                         <li>
                             <a class="text-center" href="#">
                                 <strong>Read All Messages</strong>
@@ -77,8 +83,10 @@
                             </a>
                         </li>
                     </ul>
+                    
                     <!-- /.dropdown-messages -->
                 </li>
+                <?php endif; ?>
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -117,15 +125,11 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <i><?php echo e(auth()->user()->name); ?></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="<?php echo e(url('/logout')); ?>"><i class="fa fa-sign-out fa-fw"></i> Cerrar Sesión</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -143,28 +147,120 @@
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Catalogos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                
+                                                           
+
+
+
+                                 <?php if(auth()->check() && auth()->user()->hasAnyRole('Superusuario|Jefatura')): ?>
+                                 <li>
+                                    <a href="<?php echo e(url('departamento')); ?>">Departamentos</a>
+                                </li>
                                 <li>
-                                    <a href="#">Permisos</a>
+                                    <a href="<?php echo e(url('desarrollador')); ?>">Desarrollador</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('destinosub')); ?>">Destino Subsidio</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('genero')); ?>">Genero</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('municipio')); ?>">Municipios</a>
                                 </li>
                                 
+                                <li>
+                                    <a href="<?php echo e(url('relacionfam')); ?>">Relacion Familiar</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('requisito')); ?>">Requisitos</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('rol')); ?>">Rol</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('telefono')); ?>">Telefono</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('tipoaccion')); ?>">Tipo de Acción</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('tipoingreso')); ?>">Tipo de Ingreso</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('tipotelefono')); ?>">Tipo de Telefono</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('unidadtrabajo')); ?>">Unidad de Trabajo</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('usuario')); ?>">Usuarios</a>
+                                </li>
+                                 
+                                 <?php else: ?> 
+                                 
+                                <?php endif; ?>
+                                
+                                
 
+                                
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i>Solicitudes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <!--
+                            <?php if(auth()->check() && auth()->user()->hasAnyRole('Basico|Superusuario|Jefatura')): ?>
                                 <li>
-                                    <a href="<?php echo e(url('soliusr')); ?>">Solicitud de Usuario</a>
+                                    <a href="<?php echo e(url('proyecto')); ?>">Proyectos</a>
+                                </li>
+                                <?php else: ?> 
+                                
+                             <?php endif; ?>
+                             <?php if(auth()->check() && auth()->user()->hasAnyRole('Recepcion|Superusuario|Jefatura')): ?>
+                                <li>
+                                    <a href="<?php echo e(url('personal/create')); ?>">Solicitud Persona</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo e(url('solidb')); ?>">Solicitud de DB</a>
-                                </li>
+                                        <a href="<?php echo e(url('first')); ?>">Solicitud Grupo</a>
+                                    </li>
+                                <?php else: ?> 
+                                
+                             <?php endif; ?>
+                            </ul>
+
+                        </li>
+
+                            
+
+
+                        <li>
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i>Diligencias<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                            <?php if(auth()->check() && auth()->user()->hasAnyRole('Social|Superusuario')): ?>
                                 <li>
-                                    <a href="<?php echo e(url('soliobj')); ?>">Solicitud de Obj.</a>
+                                    <a href="<?php echo e(url('proyecto')); ?>">Social</a>
                                 </li>
-                                 -->
+                                <?php else: ?> 
+                                
+                             <?php endif; ?>
+
+                             <?php if(auth()->check() && auth()->user()->hasAnyRole('Financiero|Superusuario')): ?>
+                                <li>
+                                    <a href="<?php echo e(url('expediente')); ?>">Financiero</a>
+                                </li>
+                                <?php else: ?> 
+                                
+                             <?php endif; ?>
+
+                             <?php if(auth()->check() && auth()->user()->hasAnyRole('Juridico|Superusuario')): ?>
+                                <li>
+                                    <a href="<?php echo e(url('expediente')); ?>">Juridico</a>
+                                </li>
+                                <?php else: ?> 
+                                
+                             <?php endif; ?>
                             </ul>
 
                         </li>

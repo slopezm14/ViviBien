@@ -13,14 +13,14 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                {!!Form::model($relacion,['route'=>['relacionfam.update',$relacion->id_relacion_familiar],'method'=>'PUT'])!!}
                     {!!Form::label('Descripción de la Relación')!!}
                     {!!Form::text('descripcion', null,['class'=>'form-control', 'placeholder'=>'Descripción de la Relación'])!!}
                     {!! $errors->first('descripcion','<span class="help-block">:message</span>') !!}
                     
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

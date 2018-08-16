@@ -15,16 +15,12 @@
             <div class="row">
                  {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
 
-                    {!!Form::label('Requisito de Expediente')!!}
-                    {!!Form::select('id_expediente_requisito', ['01'=>'Requisito1','02'=>'Requisito2','03'=>'Requisito2'], null, ['class' => 'form-control']) !!}
-                    
+                                
                     {!!Form::label('Relación Familiar')!!}
                     {!!Form::select('id_relacion_familiar', ['01'=>'Relacion1','02'=>'Relacion2','03'=>'Relacion3'], null, ['class' => 'form-control']) !!}
 
-                        {!!Form::label('Id Genero')!!}
+                    {!!Form::label('Id Genero')!!}
                     {!!Form::select('id_genero', ['01'=>'Genero1','02'=>'Genero2','03'=>'Genero3'], null, ['class' => 'form-control']) !!}
-
-        
 
                     {!!Form::label('Número de Documento')!!}
                     {!!Form::text('numero_documento', null,['class'=>'form-control', 'placeholder'=>'Número de Documento'])!!}
@@ -58,20 +54,7 @@
                     {!!Form::text('direccion', null,['class'=>'form-control', 'placeholder'=>'Dirección'])!!}
                     {!! $errors->first('direccion','<span class="help-block">:message</span>') !!}
 
-                    {!!Form::label('Teléfono 1')!!}
-                    {!!Form::text('telefono1', null,['class'=>'form-control', 'placeholder'=>'Teléfono 1'])!!}
-                    {!! $errors->first('telefono1','<span class="help-block">:message</span>') !!}
-
-                     {!!Form::label('Teléfono 2')!!}
-                    {!!Form::text('telefono2', null,['class'=>'form-control', 'placeholder'=>'Teléfono 2'])!!}
-                    {!! $errors->first('telefono2','<span class="help-block">:message</span>') !!}
-
-                     {!!Form::label('Teléfono 3')!!}
-                    {!!Form::text('telefono3', null,['class'=>'form-control', 'placeholder'=>'Teléfono 3'])!!}
-                    {!! $errors->first('telefono3','<span class="help-block">:message</span>') !!}
-
-
-                    
+                                        
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
                 {{-- {!!Form::close()!!}  --}}

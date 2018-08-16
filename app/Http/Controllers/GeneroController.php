@@ -3,9 +3,15 @@
 namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class GeneroController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +19,12 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        //
+        $genero = DB::table('tb_generos as g')
+        ->select('g.id_generos','g.descripcion_genero')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('genero.d_genero', array('genero'=> $genero));
     }
 
     /**
@@ -58,7 +69,10 @@ class GeneroController extends Controller
      */
     public function edit($id)
     {
-        //
+        $genero = DB::table('tb_generos')->where('id_generos', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('genero.u_Genero',['genero'=>$genero]);
     }
 
     /**
@@ -70,7 +84,8 @@ class GeneroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_generos')->where('id_generos', $id)->limit(1)
+        ->update(array('descripcion_genero'=>$request['genero']));
     }
 
     /**

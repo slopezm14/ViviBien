@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\tipo_ingreso;
+use Illuminate\Support\Facades\DB;
 
 
 class TipoIngresoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,12 @@ class TipoIngresoController extends Controller
      */
     public function index()
     {
-        //
+        $tipoingreso = DB::table('tb_tipo_ingreso as t')
+        ->select('t.id_tipo_ingreso','t.descripcion_ingreso')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('tipo_ingreso.d_tipo_ingreso', array('tipoingreso'=> $tipoingreso));
     }
 
     /**
@@ -63,7 +73,10 @@ class TipoIngresoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tipoingreso = DB::table('tb_tipo_ingreso')->where('id_tipo_ingreso', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('tipo_ingreso.u_tipo_ingreso',['tipoingreso'=>$tipoingreso]);
     }
 
     /**
@@ -75,7 +88,8 @@ class TipoIngresoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_tipo_ingreso')->where('id_tipo_ingreso', $id)->limit(1)
+        ->update(array('descripcion_ingreso'=>$request['descripcion_ingreso']));
     }
 
     /**

@@ -13,12 +13,12 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                {!!Form::model($tipotelefono,['route'=>['tipotelefono.update',$tipotelefono->id_tipotelefono],'method'=>'PUT'])!!}
 
 
 
                     {!!Form::label('Tipo Telefono')!!}
-                    {!!Form::text('tipo_telefono', null,['class'=>'form-control', 'placeholder'=>'Tipo Telefono'])!!}
+                    {!!Form::text('descripcion_tipotelefono', null,['class'=>'form-control', 'placeholder'=>'Tipo Telefono'])!!}
                     {!! $errors->first('tipo_telefono','<span class="help-block">:message</span>') !!}
 
                     
@@ -26,7 +26,7 @@
 
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

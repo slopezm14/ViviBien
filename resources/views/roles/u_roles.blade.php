@@ -13,19 +13,15 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                {!!Form::model($rol,['route'=>['rol.update',$rol->id],'method'=>'PUT'])!!}
                  
-                 {!!Form::label('Short desc')!!}
-                    {!!Form::text('short_desc', null,['class'=>'form-control', 'placeholder'=>'Descripcion corta'])!!}
-                    {!! $errors->first('short_desc','<span class="help-block">:message</span>') !!}
-
                     {!!Form::label('Descripción del Rol')!!}
                     {!!Form::text('descripcion_rol', null,['class'=>'form-control', 'placeholder'=>'Descripción del Rol'])!!}
                     {!! $errors->first('descripcion_rol','<span class="help-block">:message</span>') !!}
                     
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

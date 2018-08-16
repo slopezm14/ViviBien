@@ -1,5 +1,12 @@
 @extends('layouts.principal')
 
+@if(Session::has('message'))
+<div class="alert alert-info alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{Session::get('message')}}
+</div>
+@endif
+
 @section('content')
 
 <div class="row">
@@ -14,7 +21,7 @@
         <div class="panel-body">
             <div class="row">
                  {!!Form::open(['route'=>'proyecto.store','id'=>'contact', 'method'=>'POST'])!!} 
-
+                 
                     {!!Form::label('Municipio del Proyecto')!!}
                     {!!Form::select('id_municipio_proyecto', $municipios, null, ['class' => 'form-control']) !!}
                     
@@ -26,15 +33,15 @@
                     {!! $errors->first('nombre_proyecto','<span class="help-block">:message</span>') !!}
                     
                     {!!Form::label('Longitud del Proyecto')!!}
-                    {!!Form::number('longitud_proyecto', null,['class'=>'form-control', 'placeholder'=>'Longitud del Proyecto'])!!}
+                    {!!Form::number('longitud_proyecto', null,['class'=>'form-control', 'placeholder'=>'Longitud del Proyecto','step' => '0.1'])!!}
                     {!! $errors->first('longitud_proyecto','<span class="help-block">:message</span>') !!}
 
                     {!!Form::label('Latitud del Proyecto')!!}
-                    {!!Form::number('latitud_proyecto', null,['class'=>'form-control', 'placeholder'=>'Latitud del Proyecto'])!!}
+                    {!!Form::number('latitud_proyecto', null,['class'=>'form-control', 'placeholder'=>'Latitud del Proyecto','step' => '0.1'])!!}
                     {!! $errors->first('latitud_proyecto','<span class="help-block">:message</span>') !!}
 
                     {!!Form::label('Monto del Proyecto')!!}
-                    {!!Form::number('monto_proyecto', null,['class'=>'form-control', 'placeholder'=>'Monto del Proyecto'])!!}
+                    {!!Form::number('monto_proyecto', null,['class'=>'form-control', 'placeholder'=>'Monto del Proyecto','step' => '0.1'])!!}
                     {!! $errors->first('monto_proyecto','<span class="help-block">:message</span>') !!}
 
                     {!!Form::label('Inicio del Proyecto')!!}

@@ -16,7 +16,7 @@ class CreateBitacoraaudiTable extends Migration
         Schema::create('tb_bitacora_auditoria', function (Blueprint $table) {
             $table->increments('id_bitacora');
             $table->integer('id_usuario')->unsigned()->index();
-            $table->foreign('id_usuario')->references('id_usuario')->on('tb_usuarios');
+            $table->foreign('id_usuario')->references('id')->on('users');
             $table->string('objeto',100);
             $table->string('dato_anterior',200);
             $table->string('nuevo_dato',200);

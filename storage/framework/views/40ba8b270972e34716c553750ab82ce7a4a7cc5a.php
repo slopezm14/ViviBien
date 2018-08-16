@@ -48,12 +48,21 @@
                     <?php echo $errors->first('nombre_owner','<span class="help-block">:message</span>'); ?>
 
 
+                    <br>
+
                      <?php echo Form::label('Telefono1'); ?>
 
                     <?php echo Form::text('Num_Tel1',null, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 1'] ); ?>
 
                     <?php echo $errors->first('Num_Tel1','<span class="help-block">:message</span>'); ?>
 
+
+                    <?php echo Form::label('Tipo Telefono de Telefono1'); ?>
+
+                    <?php echo Form::select('tipotelefono1', $tipotelefonos, null, ['class' => 'form-control']); ?>
+
+
+                    <br>
 
                         <?php echo Form::label('Telefono2'); ?>
 
@@ -62,11 +71,24 @@
                     <?php echo $errors->first('Num_Tel2','<span class="help-block">:message</span>'); ?>
 
 
+                    <?php echo Form::label('Tipo Telefono de Telefono2'); ?>
+
+                    <?php echo Form::select('tipotelefono2', $tipotelefonos, null, ['class' => 'form-control']); ?>
+
+
+                    <br>
+                    
                         <?php echo Form::label('Telefono3'); ?>
 
                     <?php echo Form::text('Num_Tel3',null, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 3'] ); ?>
 
                     <?php echo $errors->first('Num_Tel3','<span class="help-block">:message</span>'); ?>
+
+
+                    <?php echo Form::label('Tipo Telefono de Telefono3'); ?>
+
+                    <?php echo Form::select('tipotelefono3', $tipotelefonos, null, ['class' => 'form-control']); ?>
+
 
             
                     <br>

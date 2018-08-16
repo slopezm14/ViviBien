@@ -7,9 +7,14 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\requisito;
 use ViviBien\tipo_ingreso;
+use Illuminate\Support\Facades\DB;
 
 class RequisitoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,12 @@ class RequisitoController extends Controller
      */
     public function index()
     {
-        //
+        $requisito = DB::table('tb_requisitos as r')
+        ->select('r.id_requisito','r.descripcion_requisito')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('requisitos.d_requisitos', array('requisito'=> $requisito));
     }
 
     /**
@@ -66,7 +76,11 @@ class RequisitoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $requisito = DB::table('tb_requisitos')->where('id_requisito', $id)->first();
+        $tipoingreso = tipo_ingreso::pluck('descripcion_ingreso','id_tipo_ingreso');
+
+        //retorna la vista, con la información del registro.
+        return view('requisitos.u_requisitos',['requisito'=>$requisito,'tipoingreso'=>$tipoingreso]);
     }
 
     /**

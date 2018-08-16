@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ViviBien\Http\Requests;
+use ViviBien\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class TelefonosController extends Controller
 {
@@ -13,7 +16,13 @@ class TelefonosController extends Controller
      */
     public function index()
     {
-        //
+        $telefonos = DB::table('tb_telefonos as tel')
+        ->select('tel.id_telefono','tel.numero_telefono','d.nombre_desarrollador')
+        ->join('tb_desarrolladores as d','d.id_desarrollador','=','tel.id_desarrollador')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('telefonos.d_telefonos', array('telefonos'=> $telefonos));
     }
 
     /**

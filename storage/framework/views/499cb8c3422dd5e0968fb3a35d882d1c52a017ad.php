@@ -2,7 +2,7 @@
 
 <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Usuarios</h1>
+            <h1 class="page-header">Expediente</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -15,11 +15,7 @@
 
                     
 
-                    <?php echo Form::label('Login'); ?>
-
-                    <?php echo Form::select('id_departamento', ['01'=>'Login1','02'=>'Login2','03'=>'Login3'], null, ['class' => 'form-control']); ?>
-
-
+                   
                     <?php echo Form::label('Tipo de Ingreso'); ?>
 
                     <?php echo Form::select('id_tipo_ingreso', ['01'=>'Tipo1','02'=>'Tipo2','03'=>'Tipo3'], null, ['class' => 'form-control']); ?>
@@ -83,6 +79,11 @@
 
                     <?php echo $errors->first('anio_expediente','<span class="help-block">:message</span>'); ?>
 
+
+
+                     <?php echo Form::label('Id. Usuario'); ?>
+
+                    <?php echo Form::select('id_usuario', ['01'=>'User1','02'=>'User2','03'=>'User3'], null, ['class' => 'form-control']); ?>
 
 
                     <br>

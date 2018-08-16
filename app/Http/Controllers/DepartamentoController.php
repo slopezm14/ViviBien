@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\cat_departamento;
+use Illuminate\Support\Facades\DB;
+
+use Session;
+use Redirect;
 
 class DepartamentoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +24,12 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        
+        $departamentos = DB::table('tb_cat_departamento as d')
+        ->select('d.id_departamento','d.descripcion_departamento')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('cat_departamento.d_departamento', array('departamentos'=> $departamentos));
     }
 
     /**
@@ -37,11 +50,26 @@ class DepartamentoController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $validado = $this->validate($request,[
+            'descripcion_departamento' => 'required|max:100',
+            ]);
+
         \ViviBien\cat_departamento::create([
             'descripcion_departamento'=>$request['descripcion_departamento'],
         ]);
 
+
+        \ViviBien\bitacora::create([
+            'id_usuario'=>auth()->user()->id,
+            'objeto'=>'tb_cat_departamento',
+            'fecha_accion'=>\Carbon\Carbon::now(),
+            'direccion_ip'=>$request->ip(),
+            'nombre_computadora'=>gethostname(),
+            'id_accion'=>1,
+        ]);
+
+        Session::flash('message','Inserción Exitosa!');
+        return Redirect::to('/departamento/create');
 
     }
 
@@ -64,7 +92,10 @@ class DepartamentoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $departamento = DB::table('tb_cat_departamento')->where('id_departamento', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('cat_departamento.u_departamento',['departamento'=>$departamento]);
     }
 
     /**
@@ -76,7 +107,8 @@ class DepartamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_cat_departamento')->where('id_departamento', $id)->limit(1)
+        ->update(array('descripcion_departamento'=>$request['descripcion_departamento']));
     }
 
     /**

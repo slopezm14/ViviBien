@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\tipostelefono;
+use Illuminate\Support\Facades\DB;
 
 class TipoTelefController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,12 @@ class TipoTelefController extends Controller
      */
     public function index()
     {
-        //
+        $tipostelefonos = DB::table('tb_tipos_telefonos as t')
+        ->select('t.id_tipotelefono','t.descripcion_tipotelefono')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('tipo_telefono.d_tipoTelefono', array('tipostelefonos'=> $tipostelefonos));
     }
 
     /**
@@ -61,7 +71,11 @@ class TipoTelefController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $tipotelefono = DB::table('tb_tipos_telefonos')->where('id_tipotelefono', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('tipo_telefono.u_tipoTelefono',['tipotelefono'=>$tipotelefono]);
     }
 
     /**
@@ -73,7 +87,8 @@ class TipoTelefController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_tipos_telefonos')->where('id_tipotelefono', $id)->limit(1)
+        ->update(array('descripcion_tipotelefono'=>$request['descripcion_tipotelefono']));
     }
 
     /**

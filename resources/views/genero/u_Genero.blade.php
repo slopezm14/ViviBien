@@ -13,12 +13,12 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                    {!!Form::model($genero,['route'=>['genero.update',$genero->id_generos],'method'=>'PUT'])!!}
 
 
 
                     {!!Form::label('Genero')!!}
-                    {!!Form::text('genero', null,['class'=>'form-control', 'placeholder'=>'Genero'])!!}
+                    {!!Form::text('descripcion_genero', null,['class'=>'form-control', 'placeholder'=>'Genero'])!!}
                     {!! $errors->first('genero','<span class="help-block">:message</span>') !!}
 
                     
@@ -26,7 +26,7 @@
 
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

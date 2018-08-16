@@ -37,12 +37,7 @@
                     {!!Form::text('nombre2', null,['class'=>'form-control', 'placeholder'=>'Nombre 2'])!!}
                     {!! $errors->first('nombre2','<span class="help-block">:message</span>') !!}
 
-                    
-                    {!!Form::label('Nombre3')!!}
-                    {!!Form::text('nombre3', null,['class'=>'form-control', 'placeholder'=>'Nombre 3'])!!}
-                    {!! $errors->first('nombre3','<span class="help-block">:message</span>') !!}
-
-                    
+                   
                     {!!Form::label('Apellido 1')!!}
                     {!!Form::text('apellido1', null,['class'=>'form-control', 'placeholder'=>'Apellido 1'])!!}
                     {!! $errors->first('apellido1','<span class="help-block">:message</span>') !!}
@@ -51,11 +46,6 @@
                     {!!Form::label('Apellido 2')!!}
                     {!!Form::text('apellido2', null,['class'=>'form-control', 'placeholder'=>'Apellido 2'])!!}
                     {!! $errors->first('apellido2','<span class="help-block">:message</span>') !!}
-
-                    
-                    {!!Form::label('Apellido 3')!!}
-                    {!!Form::text('apellido3', null,['class'=>'form-control', 'placeholder'=>'Apellido 3'])!!}
-                    {!! $errors->first('apellido3','<span class="help-block">:message</span>') !!}
 
                     {!!Form::label('Estatus')!!}
                     {!!Form::select('estatus', ['A'=>'Activo','I'=>'Inactivo'], null, ['class' => 'form-control']) !!}

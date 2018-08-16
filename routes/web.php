@@ -13,7 +13,7 @@
 
 
 
-Route::get('/','ViewsController@index');
+//Route::get('/','ViewsController@index');
 
 
 /* Resource Controllers */
@@ -34,3 +34,20 @@ Route::resource('tipoingreso','TipoIngresoController');
 Route::resource('tipotelefono','TipoTelefController');
 Route::resource('unidadtrabajo','UniTrabajoController');
 Route::resource('usuario','UsuarioController');
+Route::resource('expdili','ExpedienteDiligController');
+
+Route::resource('personal','SolicitudPController');
+Route::resource('grupo','SolicitudGController');
+
+//Solicitud de Grup
+Route::get('/first','ViewsController@first');
+Route::post('/second','ViewsController@second')->name('second');
+//Diligencias
+Route::get('/chose','ViewsController@chose')->name('chose');
+Route::post('/list','ViewsController@list')->name('list');
+Route::post('/update','ViewsController@update')->name('update');
+
+Auth::routes();
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
+Route::get('/', 'HomeController@index')->name('home');

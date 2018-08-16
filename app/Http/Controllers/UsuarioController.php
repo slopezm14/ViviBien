@@ -10,9 +10,14 @@ use ViviBien\roles;
 use ViviBien\unidad_trabajo;
 use ViviBien\genero;
 use Illuminate\Support\Facades\DB;
+use ViviBien\User;
 
 class UsuarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +25,12 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = DB::table('users as u')
+        ->select('u.id','u.email','u.name')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('usuarios.d_usuario', array('usuarios'=> $usuarios));
     }
 
     /**
@@ -30,9 +40,10 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $roles = roles::pluck('descripcion_rol','id_rol');
+        $roles = roles::pluck('descripcion_rol','descripcion_rol');
         $unidad_trabajo = unidad_trabajo::pluck('descripcion_unidad','id_unidad_trabajo');
         $genero = genero::pluck('descripcion_genero','id_generos');
+
         return view('usuarios.i_usuario', compact('roles','unidad_trabajo','genero'));
     }
 
@@ -44,20 +55,25 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        \ViviBien\usuarios::create([
-            'username'=>$request['usuario'],
-            'id_rol'=>$request['id_rol'],
+        $user=User::create([
+            'email'=>$request['usuario'],
             'id_unidad_trabajo'=>$request['id_unidad'],
             'id_generos'=>$request['id_genero'],
-            'nombre1'=>$request['nombre1'],
+            'name'=>$request['nombre1'],
             'nombre2'=>$request['nombre2'],
             'nombre3'=>$request['nombre3'],
             'apellido1'=>$request['apellido1'],
             'apellido2'=>$request['apellido2'],
             'apellido3'=>$request['apellido3'],
             'estatus'=>$request['estatus'],
-            'clave'=>$request['clave'],
+            'password'=>bcrypt($request['clave']),
         ]);
+        //Para guardar un solo rol
+        $user->assignRole($request['descripcion_rol']);
+
+        //Para multiples roles
+        //$user->assignRole('Basico', 'Recepcion','Jefatura','Financiero','Social','Juridico','Superusuario');
+        
     }
 
     /**
@@ -79,7 +95,13 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = DB::table('users')->where('id', $id)->first();
+        $unidad_trabajo = unidad_trabajo::pluck('descripcion_unidad','id_unidad_trabajo');
+        $genero = genero::pluck('descripcion_genero','id_generos');
+
+
+        //retorna la vista, con la información del registro.
+        return view('usuarios.u_usuario',['usuario'=>$usuario,'unidad_trabajo'=>$unidad_trabajo,'genero'=>$genero]);
     }
 
     /**
@@ -91,7 +113,20 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('users')->where('id', $id)->limit(1)
+        ->update(array(
+            'email'=>$request['email'],
+            'id_rol'=>$request['id_rol'],
+            'id_unidad_trabajo'=>$request['id_unidad'],
+            'id_generos'=>$request['id_genero'],
+            'name'=>$request['name'],
+            'nombre2'=>$request['nombre2'],
+            'nombre3'=>$request['nombre3'],
+            'apellido1'=>$request['apellido1'],
+            'apellido2'=>$request['apellido2'],
+            'apellido3'=>$request['apellido3'],
+            'estatus'=>$request['estatus'],
+        ));
     }
 
     /**

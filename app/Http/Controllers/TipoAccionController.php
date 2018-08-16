@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\tipoaccion;
+use Illuminate\Support\Facades\DB;
 
 class TipoAccionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,12 @@ class TipoAccionController extends Controller
      */
     public function index()
     {
-        //
+        $tiposacciones = DB::table('tb_tipoaccion as t')
+        ->select('t.id_accion','t.descripcion_accion')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('tipoAccion.d_tipo_accion', array('tiposacciones'=> $tiposacciones));
     }
 
     /**
@@ -61,7 +71,10 @@ class TipoAccionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tipoaccion = DB::table('tb_tipoaccion')->where('id_accion', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('tipoAccion.u_tipo_accion',['tipoaccion'=>$tipoaccion]);
     }
 
     /**
@@ -73,7 +86,8 @@ class TipoAccionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_tipoaccion')->where('id_accion', $id)->limit(1)
+        ->update(array('descripcion_accion'=>$request['descripcion_accion']));
     }
 
     /**

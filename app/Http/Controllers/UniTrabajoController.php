@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\unidad_trabajo;
+use Illuminate\Support\Facades\DB;
 
 class UniTrabajoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,12 @@ class UniTrabajoController extends Controller
      */
     public function index()
     {
-        //
+        $unidades = DB::table('tb_unidad_trabajo as u')
+        ->select('u.id_unidad_trabajo','u.descripcion_unidad')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('unidad_trabajo.d_unidad', array('unidades'=> $unidades));
     }
 
     /**
@@ -50,7 +60,7 @@ class UniTrabajoController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -61,7 +71,10 @@ class UniTrabajoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $unidad = DB::table('tb_unidad_trabajo')->where('id_unidad_trabajo', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('unidad_trabajo.u_unidad',['unidad'=>$unidad]);
     }
 
     /**
@@ -73,7 +86,8 @@ class UniTrabajoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_unidad_trabajo')->where('id_unidad_trabajo', $id)->limit(1)
+        ->update(array('descripcion_unidad'=>$request['descripcion_unidad']));
     }
 
     /**

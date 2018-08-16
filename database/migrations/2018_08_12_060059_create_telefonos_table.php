@@ -18,6 +18,10 @@ class CreateTelefonosTable extends Migration
             $table->string('numero_telefono',8);
             $table->integer('id_desarrollador')->unsigned()->index();
             $table->foreign('id_desarrollador')->references('id_desarrollador')->on('tb_desarrolladores');
+            $table->integer('id_tipotelefono')->unsigned()->index();
+            $table->foreign('id_tipotelefono')->references('id_tipotelefono')->on('tb_tipos_telefonos');
+            $table->integer('id_solicitante')->unsigned()->index();
+            $table->foreign('id_solicitante')->references('id_solicitante')->on('tb_info_personas_invo');
             $table->timestamps();
         });
     }

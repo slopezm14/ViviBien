@@ -35,17 +35,33 @@
                     {!!Form::text('nombre_owner',null, ['class'=>'form-control', 'placeholder'=>'Nombre del Dueño'] )!!}
                     {!! $errors->first('nombre_owner','<span class="help-block">:message</span>') !!}
 
+                    <br>
+
                      {!!Form::label('Telefono1')!!}
                     {!!Form::text('Num_Tel1',null, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 1'] )!!}
                     {!! $errors->first('Num_Tel1','<span class="help-block">:message</span>') !!}
+
+                    {!!Form::label('Tipo Telefono de Telefono1')!!}
+                    {!!Form::select('tipotelefono1', $tipotelefonos, null, ['class' => 'form-control']) !!}
+
+                    <br>
 
                         {!!Form::label('Telefono2')!!}
                     {!!Form::text('Num_Tel2',null, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 2'] )!!}
                     {!! $errors->first('Num_Tel2','<span class="help-block">:message</span>') !!}
 
+                    {!!Form::label('Tipo Telefono de Telefono2')!!}
+                    {!!Form::select('tipotelefono2', $tipotelefonos, null, ['class' => 'form-control']) !!}
+
+                    <br>
+                    
                         {!!Form::label('Telefono3')!!}
                     {!!Form::text('Num_Tel3',null, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 3'] )!!}
                     {!! $errors->first('Num_Tel3','<span class="help-block">:message</span>') !!}
+
+                    {!!Form::label('Tipo Telefono de Telefono3')!!}
+                    {!!Form::select('tipotelefono3', $tipotelefonos, null, ['class' => 'form-control']) !!}
+
             
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 

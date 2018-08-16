@@ -50,15 +50,7 @@
                     <?php echo $errors->first('nombre2','<span class="help-block">:message</span>'); ?>
 
 
-                    
-                    <?php echo Form::label('Nombre3'); ?>
-
-                    <?php echo Form::text('nombre3', null,['class'=>'form-control', 'placeholder'=>'Nombre 3']); ?>
-
-                    <?php echo $errors->first('nombre3','<span class="help-block">:message</span>'); ?>
-
-
-                    
+                   
                     <?php echo Form::label('Apellido 1'); ?>
 
                     <?php echo Form::text('apellido1', null,['class'=>'form-control', 'placeholder'=>'Apellido 1']); ?>
@@ -72,14 +64,6 @@
                     <?php echo Form::text('apellido2', null,['class'=>'form-control', 'placeholder'=>'Apellido 2']); ?>
 
                     <?php echo $errors->first('apellido2','<span class="help-block">:message</span>'); ?>
-
-
-                    
-                    <?php echo Form::label('Apellido 3'); ?>
-
-                    <?php echo Form::text('apellido3', null,['class'=>'form-control', 'placeholder'=>'Apellido 3']); ?>
-
-                    <?php echo $errors->first('apellido3','<span class="help-block">:message</span>'); ?>
 
 
                     <?php echo Form::label('Estatus'); ?>

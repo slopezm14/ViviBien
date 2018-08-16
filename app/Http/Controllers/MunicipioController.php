@@ -7,9 +7,14 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\cat_departamento;
 use ViviBien\cat_municipio;
+use Illuminate\Support\Facades\DB;
 
 class MunicipioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,13 @@ class MunicipioController extends Controller
      */
     public function index()
     {
-        //
+        $municipios = DB::table('tb_cat_municipios as m')
+        ->select('m.id_municipio','d.descripcion_departamento','m.descripcion_municipio')
+        ->join('tb_cat_departamento as d','d.id_departamento','=','m.id_departamento')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('cat_municipios.d_municipio', array('municipios'=> $municipios));
     }
 
     /**
@@ -68,7 +79,11 @@ class MunicipioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $departamentos = cat_departamento::pluck('descripcion_departamento','id_departamento'); 
+        $municipios = DB::table('tb_cat_municipios')->where('id_municipio', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('cat_municipios.u_municipio',['municipios'=>$municipios,'departamentos'=>$departamentos]);
     }
 
     /**
@@ -80,7 +95,9 @@ class MunicipioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_cat_municipios')->where('id_municipio', $id)->limit(1)
+        ->update(array('descripcion_municipio'=>$request['descripcion_municipio'],
+        'id_departamento'=>$request['id_departamento']));
     }
 
     /**

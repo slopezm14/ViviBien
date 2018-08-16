@@ -13,12 +13,12 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                {!!Form::model($tipoaccion,['route'=>['tipoaccion.update',$tipoaccion->id_accion],'method'=>'PUT'])!!}
 
 
 
                     {!!Form::label('Descripcion de Accion')!!}
-                    {!!Form::text('descripAccion', null,['class'=>'form-control', 'placeholder'=>'Descripcion de Accion'])!!}
+                    {!!Form::text('descripcion_accion', null,['class'=>'form-control', 'placeholder'=>'Descripcion de Accion'])!!}
                     {!! $errors->first('descripAccion','<span class="help-block">:message</span>') !!}
 
                     
@@ -26,7 +26,7 @@
 
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

@@ -7,11 +7,16 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\desarrollador;
 use ViviBien\telefono;
+use ViviBien\tipostelefono;
 use Illuminate\Support\Facades\DB;
 
 
 class DesarrolladorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,12 @@ class DesarrolladorController extends Controller
      */
     public function index()
     {
-        
+        $desarrolladores = DB::table('tb_desarrolladores as d')
+        ->select('d.id_desarrollador','d.nombre_desarrollador','d.correo_electronico')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('desarrolladores.d_desarrollador', array('desarrolladores'=> $desarrolladores));
     }
 
     /**
@@ -29,7 +39,9 @@ class DesarrolladorController extends Controller
      */
     public function create()
     {
-        return view('desarrolladores.i_desarrollador');
+        $tipotelefonos = tipostelefono::pluck('descripcion_tipotelefono','id_tipotelefono');
+
+        return view('desarrolladores.i_desarrollador',array('tipotelefonos'=>$tipotelefonos));
     }
 
     /**
@@ -57,12 +69,14 @@ class DesarrolladorController extends Controller
             \ViviBien\telefono::create([
                 'numero_telefono'=>$request['Num_Tel1'],
                 'id_desarrollador'=>$results[0]->id_desarrollador,
+                'id_tipotelefono'=>$request['tipotelefono1'],
             ]);
         }
         if(count($request['Num_Tel2']) != 0){
             \ViviBien\telefono::create([
                 'numero_telefono'=>$request['Num_Tel2'],
                 'id_desarrollador'=>$results[0]->id_desarrollador,
+                'id_tipotelefono'=>$request['tipotelefono2']
             ]);
         }
 
@@ -70,6 +84,7 @@ class DesarrolladorController extends Controller
             \ViviBien\telefono::create([
                 'numero_telefono'=>$request['Num_Tel3'],
                 'id_desarrollador'=>$results[0]->id_desarrollador,
+                'id_tipotelefono'=>$request['tipotelefono3']
             ]);
         }
     }
@@ -93,7 +108,17 @@ class DesarrolladorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $desarrollador = DB::table('tb_desarrolladores')->where('id_desarrollador', $id)->first();
+
+        $tipotelefonos = tipostelefono::pluck('descripcion_tipotelefono','id_tipotelefono');
+
+        $telefono = DB::table('tb_telefonos as t')
+        ->select('t.id_telefono','t.numero_telefono','d.id_desarrollador')
+        ->join('tb_desarrolladores as d','d.id_desarrollador','=','t.id_desarrollador')
+        ->where('t.id_desarrollador', $id)
+        ->get();
+
+        return view('desarrolladores.u_desarrollador',array('desarrollador'=>$desarrollador,'tipotelefonos'=>$tipotelefonos,'telefono'=>$telefono));
     }
 
     /**
@@ -105,7 +130,41 @@ class DesarrolladorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_desarrolladores')->where('id_desarrollador', $id)->limit(1)
+        ->update(array(
+        'nombre_desarrollador'=>$request['nombre_desarrollador'],
+        'nit'=>$request['nit'],
+        'direccion_empresa'=>$request['direccion_empresa'],
+        'correo_electronico'=>$request['correo_electronico'],
+        'nombre_owner'=>$request['nombre_owner']
+        ));
+
+        if(count($request['Num_Tel1']) != 0){
+            DB::table('tb_telefonos')->where('id_desarrollador', $id)->where('numero_telefono',$request['Num_Tel1'])->limit(1)
+            ->update(array(
+                'numero_telefono'=>$request['Num_Tel1'],
+                'id_tipotelefono'=>$request['id_ttelefono1']
+        ));
+
+        }
+        if(count($request['Num_Tel2']) != 0){
+            DB::table('tb_telefonos')->where('id_desarrollador', $id)->where('numero_telefono',$request['Num_Tel2'])->limit(1)
+            ->update(array(
+                'numero_telefono'=>$request['Num_Tel2'],
+                'id_tipotelefono'=>$request['id_ttelefono2']
+        ));
+        }
+
+        if(count($request['Num_Tel3']) != 0){
+            DB::table('tb_telefonos')->where('id_desarrollador', $id)->where('numero_telefono',$request['Num_Tel3'])->limit(1)
+            ->update(array(
+                'numero_telefono'=>$request['Num_Tel3'],
+                'id_tipotelefono'=>$request['id_ttelefono3']
+        ));
+        }
+
+
+
     }
 
     /**

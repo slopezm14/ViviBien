@@ -13,14 +13,14 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                {!!Form::model($departamento,['route'=>['departamento.update',$departamento->id_departamento],'method'=>'PUT'])!!}
                     {!!Form::label('Descripción del Departamento')!!}
                     {!!Form::text('descripcion_departamento', null,['class'=>'form-control', 'placeholder'=>'Descripción del Departamento'])!!}
                     {!! $errors->first('descripcion_departamento','<span class="help-block">:message</span>') !!}
                     
                     <br>
                     {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!} 
-                {{-- {!!Form::close()!!}  --}}
+                {!!Form::close()!!} 
             </div>
         </div>
     </div>

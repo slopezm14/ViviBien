@@ -7,6 +7,7 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\categoriadili;
 use ViviBien\unidad_trabajo;
+use Illuminate\Support\Facades\DB;
 
 class CateDiliController extends Controller
 {
@@ -17,7 +18,11 @@ class CateDiliController extends Controller
      */
     public function index()
     {
-        //
+        $diligencias = DB::table('tb_cat_diligencias as d')
+        ->select('d.id_diligencia','d.descripcion_diligencia','u.descripcion_unidad')
+        ->join('tb_unidad_trabajo as u','u.id_unidad_trabajo','=','d.id_unidad_trabajo')
+        ->get();
+        return view('cat_diligencias.d_cat_dili', array('diligencias'=> $diligencias));
     }
 
     /**
@@ -67,7 +72,10 @@ class CateDiliController extends Controller
      */
     public function edit($id)
     {
-        //
+        $diligencia = DB::table('tb_cat_diligencias')->where('id_diligencia', $id)->first();
+        $unidad = unidad_trabajo::pluck('descripcion_unidad','id_unidad_trabajo');
+        //retorna la vista, con la información del registro.
+        return view('cat_diligencias.u_cat_dili',['diligencia'=>$diligencia,'unidad'=>$unidad]);
     }
 
     /**
@@ -79,7 +87,13 @@ class CateDiliController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_cat_diligencias')->where('id_diligencia', $id)->limit(1)
+        ->update(array(
+            'id_unidad_trabajo'=>$request['id_unidad_trabajo'],
+            'descripcion_diligencia'=>$request['descripcion_diligencia'],
+            'obligatoria'=>$request['obligatoria'],
+            'orden'=>$request['orden'],
+        ));
     }
 
     /**

@@ -9,10 +9,20 @@ use ViviBien\proyectos;
 use ViviBien\desarrollador;
 use ViviBien\cat_municipio;
 use Illuminate\Support\Facades\DB;
+use Session;
+use Redirect;
+use Illuminate\Support\Facades\Auth;
+use ViviBien\Http\Middleware\CheckRoles;
 
 
 class ProyectoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['role:Basico|Jefatura|Superusuario']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +30,15 @@ class ProyectoController extends Controller
      */
     public function index()
     {
-       
+        
+        $proyectos = DB::table('tb_cat_proyectos as p')
+        ->select('p.id_proyecto','p.nombre_proyecto','m.descripcion_municipio','d.nombre_desarrollador')
+        ->join('tb_cat_municipios as m','m.id_municipio','=','p.id_municipio')
+        ->join('tb_desarrolladores as d','d.id_desarrollador','=','p.id_desarrollador')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('cat_proyectos.d_proyecto', array('proyectos'=> $proyectos));
     }
 
     /**
@@ -43,8 +61,12 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
+        $validado = $this->validate($request,[
+            'fecha_inicio_trabajos' => 'required|date|after:today',
+            ]);
+
         \ViviBien\proyectos::create([
-            'id_municipio_proyecto'=>$request['id_municipio_proyecto'],
+            'id_municipio'=>$request['id_municipio_proyecto'],
             'id_desarrollador'=>$request['id_desarrollador'],
             'nombre_proyecto'=>$request['nombre_proyecto'],
             'longitud_proyecto'=>$request['longitud_proyecto'],
@@ -52,6 +74,9 @@ class ProyectoController extends Controller
             'monto_aproximado_proyecto'=>$request['monto_proyecto'],
             'fecha_inicio_trabajo'=>$request['fecha_inicio_trabajos'],
         ]);
+
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('proyecto/create');
     }
 
     /**
@@ -73,7 +98,12 @@ class ProyectoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $desarrollador = desarrollador::pluck('nombre_desarrollador','id_desarrollador');
+        $municipios = cat_municipio::pluck('descripcion_municipio','id_municipio');
+        $proyecto = DB::table('tb_cat_proyectos')->where('id_proyecto', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('cat_proyectos.u_proyecto',['desarrollador'=>$desarrollador,'municipios'=>$municipios,'proyecto'=>$proyecto]);
     }
 
     /**
@@ -85,7 +115,14 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_cat_proyectos')->where('id_proyecto', $id)->limit(1)
+        ->update(array('id_municipio'=>$request['id_municipio_proyecto'],
+        'id_desarrollador'=>$request['id_desarrollador'],
+        'nombre_proyecto'=>$request['nombre_proyecto'],
+        'longitud_proyecto'=>$request['longitud_proyecto'],
+        'latitud_proyecto'=>$request['latitud_proyecto'],
+        'monto_aproximado_proyecto'=>$request['monto_aproximado_proyecto'],
+        'fecha_inicio_trabajo'=>$request['fecha_inicio_trabajos']));
     }
 
     /**

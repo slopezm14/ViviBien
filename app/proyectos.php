@@ -10,7 +10,7 @@ class proyectos extends Model
 
     protected $primaryKey = 'id_proyecto';
 
-    protected $fillable = ['id_municipio_proyecto','id_desarrollador','nombre_proyecto','longitud_proyecto','latitud_proyecto',
+    protected $fillable = ['id_municipio','id_desarrollador','nombre_proyecto','longitud_proyecto','latitud_proyecto',
     'monto_aproximado_proyecto','fecha_inicio_trabajo'];
 
     public $timestamps = true;

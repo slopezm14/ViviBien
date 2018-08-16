@@ -13,10 +13,10 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                {!!Form::model($municipios,['route'=>['municipio.update',$municipios->id_municipio],'method'=>'PUT'])!!}
 
                     {!!Form::label('Departamento')!!}
-                    {!!Form::select('id_departamento', ['01'=>'Jutiapa','02'=>'Jalapa','03'=>'Santa Rosa'], null, ['class' => 'form-control']) !!}
+                    {!!Form::select('id_departamento', $departamentos, $municipios->id_departamento, ['class' => 'form-control']) !!}
                     <br>
                     {!!Form::label('Descripción del Municipio')!!}
                     {!!Form::text('descripcion_municipio', null,['class'=>'form-control', 'placeholder'=>'Descripción del Municipio'])!!}

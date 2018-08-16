@@ -55,16 +55,22 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                    @hasanyrole('Social|Superusuario|Financiero|Juridico')
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
+                    
+                                
+                                
+                             
                     <ul class="dropdown-menu dropdown-messages">
                         <!--
                             MESSAGES HERE
                             __________
                          -->
                         <li class="divider"></li>
+                        
                         <li>
                             <a class="text-center" href="#">
                                 <strong>Read All Messages</strong>
@@ -72,8 +78,10 @@
                             </a>
                         </li>
                     </ul>
+                    
                     <!-- /.dropdown-messages -->
                 </li>
+                @endhasanyrole
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -112,15 +120,11 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <i>{{ auth()->user()->name }}</i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{url('/logout')}}"><i class="fa fa-sign-out fa-fw"></i> Cerrar Sesión</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -138,28 +142,120 @@
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Catalogos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                
+                                                           
+
+
+
+                                 @hasanyrole('Superusuario|Jefatura')
+                                 <li>
+                                    <a href="{{url('departamento')}}">Departamentos</a>
+                                </li>
                                 <li>
-                                    <a href="#">Permisos</a>
+                                    <a href="{{url('desarrollador')}}">Desarrollador</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('destinosub')}}">Destino Subsidio</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('genero')}}">Genero</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('municipio')}}">Municipios</a>
                                 </li>
                                 
+                                <li>
+                                    <a href="{{url('relacionfam')}}">Relacion Familiar</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('requisito')}}">Requisitos</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('rol')}}">Rol</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('telefono')}}">Telefono</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('tipoaccion')}}">Tipo de Acción</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('tipoingreso')}}">Tipo de Ingreso</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('tipotelefono')}}">Tipo de Telefono</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('unidadtrabajo')}}">Unidad de Trabajo</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('usuario')}}">Usuarios</a>
+                                </li>
+                                 
+                                 @else 
+                                 
+                                @endhasanyrole
+                                
+                                
 
+                                
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i>Solicitudes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <!--
+                            @hasanyrole('Basico|Superusuario|Jefatura')
                                 <li>
-                                    <a href="{{url('soliusr')}}">Solicitud de Usuario</a>
+                                    <a href="{{url('proyecto')}}">Proyectos</a>
+                                </li>
+                                @else 
+                                
+                             @endhasanyrole
+                             @hasanyrole('Recepcion|Superusuario|Jefatura')
+                                <li>
+                                    <a href="{{url('personal/create')}}">Solicitud Persona</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('solidb')}}">Solicitud de DB</a>
-                                </li>
+                                        <a href="{{url('first')}}">Solicitud Grupo</a>
+                                    </li>
+                                @else 
+                                
+                             @endhasanyrole
+                            </ul>
+
+                        </li>
+
+                            
+
+
+                        <li>
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i>Diligencias<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                            @hasanyrole('Social|Superusuario')
                                 <li>
-                                    <a href="{{url('soliobj')}}">Solicitud de Obj.</a>
+                                    <a href="{{url('proyecto')}}">Social</a>
                                 </li>
-                                 -->
+                                @else 
+                                
+                             @endhasanyrole
+
+                             @hasanyrole('Financiero|Superusuario')
+                                <li>
+                                    <a href="{{url('expediente')}}">Financiero</a>
+                                </li>
+                                @else 
+                                
+                             @endhasanyrole
+
+                             @hasanyrole('Juridico|Superusuario')
+                                <li>
+                                    <a href="{{url('expediente')}}">Juridico</a>
+                                </li>
+                                @else 
+                                
+                             @endhasanyrole
                             </ul>
 
                         </li>

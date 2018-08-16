@@ -29,6 +29,8 @@
                         </a>
                     </div>
                 </div>
+                
+                <?php if(auth()->check() && auth()->user()->hasAnyRole('Social|Financiero|Juridico')): ?>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-green">
                         <div class="panel-heading">
@@ -37,12 +39,12 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
+                                    <div class="huge"><?php echo e($conteo); ?></div>
                                     <div>Aprobacion</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                    <a href="<?php echo e(route('chose')); ?>">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -51,6 +53,7 @@
                         </a>
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
 
 

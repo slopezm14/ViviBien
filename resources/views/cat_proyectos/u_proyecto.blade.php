@@ -13,17 +13,14 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+                    {!!Form::model($proyecto,['route'=>['proyecto.update',$proyecto->id_proyecto],'method'=>'PUT'])!!}
 
                     {!!Form::label('Municipio del Proyecto')!!}
-                    {!!Form::select('id_municipio_proyecto', ['01'=>'Jutiapa','02'=>'El Progreso','03'=>'San José Acatempa'], null, ['class' => 'form-control']) !!}
+                    {!!Form::select('id_municipio_proyecto', $municipios, $proyecto->id_municipio, ['class' => 'form-control']) !!}
                     
                     {!!Form::label('Desarrollador')!!}
-                    {!!Form::select('id_desarrollador', ['01'=>'Desarrollador1','02'=>'Desarrollador2','03'=>'Desarrollador3'], null, ['class' => 'form-control']) !!}
+                    {!!Form::select('id_desarrollador', $desarrollador, $proyecto->id_desarrollador, ['class' => 'form-control']) !!}
                     
-                    {!!Form::label('Departamento')!!}
-                    {!!Form::select('id_departamento', ['01'=>'Jutiapa','02'=>'Jalapa','03'=>'Santa Rosa'], null, ['class' => 'form-control']) !!}
-
                     {!!Form::label('Nombre del Proyecto')!!}
                     {!!Form::text('nombre_proyecto', null,['class'=>'form-control', 'placeholder'=>'Nombre del Proyecto'])!!}
                     {!! $errors->first('nombre_proyecto','<span class="help-block">:message</span>') !!}
@@ -41,7 +38,7 @@
                     {!! $errors->first('latitud_proyecto','<span class="help-block">:message</span>') !!}
 
                     {!!Form::label('Monto del Proyecto')!!}
-                    {!!Form::number('monto_proyecto', null,['class'=>'form-control', 'placeholder'=>'Monto del Proyecto'])!!}
+                    {!!Form::number('monto_aproximado_proyecto', null,['class'=>'form-control', 'placeholder'=>'Monto del Proyecto'])!!}
                     {!! $errors->first('monto_proyecto','<span class="help-block">:message</span>') !!}
 
                     {!!Form::label('Inicio del Proyecto')!!}

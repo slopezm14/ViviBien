@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\relacion_familiar;
+use Illuminate\Support\Facades\DB;
 
 class RelacionFamController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,12 @@ class RelacionFamController extends Controller
      */
     public function index()
     {
-        //
+        $relacion = DB::table('tb_cat_relacion_familiar as r')
+        ->select('r.id_relacion_familiar','r.descripcion')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('cat_relacion_familiar.d_relacion', array('relacion'=> $relacion));
     }
 
     /**
@@ -61,7 +71,10 @@ class RelacionFamController extends Controller
      */
     public function edit($id)
     {
-        //
+        $relacion = DB::table('tb_cat_relacion_familiar')->where('id_relacion_familiar', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('cat_relacion_familiar.u_relacion',['relacion'=>$relacion]);
     }
 
     /**
@@ -73,7 +86,8 @@ class RelacionFamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('tb_cat_relacion_familiar')->where('id_relacion_familiar', $id)->limit(1)
+        ->update(array('descripcion'=>$request['descripcion']));
     }
 
     /**

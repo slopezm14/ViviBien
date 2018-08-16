@@ -6,9 +6,16 @@ use Illuminate\Http\Request;
 use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\roles;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RolController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:Jefatura|Superusuario']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,12 @@ class RolController extends Controller
      */
     public function index()
     {
-        //
+        $roles = DB::table('roles as r')
+        ->select('r.id','r.name')
+        ->get();
+
+        //Retorna la información en esta vista.
+        return view('roles.d_roles', array('roles'=> $roles));
     }
 
     /**
@@ -37,10 +49,9 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        \ViviBien\roles::create([
-            'descripcion_rol'=>$request['descripcion_rol'],
-            'short_desc'=>$request['short_desc'],
-        ]);
+        $role = Role::create(['name' => $request['descripcion_rol']]);
+
+        return back();
     }
 
     /**
@@ -62,7 +73,10 @@ class RolController extends Controller
      */
     public function edit($id)
     {
-        //
+        $rol = DB::table('roles')->where('id', $id)->first();
+
+        //retorna la vista, con la información del registro.
+        return view('roles.u_roles',['rol'=>$rol]);
     }
 
     /**
@@ -74,7 +88,8 @@ class RolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('roles')->where('id', $id)->limit(1)
+        ->update(array('name'=>$request['descripcion_rol']));
     }
 
     /**
