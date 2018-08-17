@@ -76,6 +76,16 @@ class ProyectoController extends Controller
             'fecha_inicio_trabajo'=>$request['fecha_inicio_trabajos'],
         ]);
 
+
+        \ViviBien\bitacora::create([
+            'id_usuario'=>auth()->user()->id,
+            'objeto'=>'tb_cat_proyectos',
+            'fecha_accion'=>\Carbon\Carbon::now(),
+            'direccion_ip'=>'127.0.0.1',
+            'nombre_computadora'=>gethostname(),
+            'id_accion'=>1,
+        ]);
+
         Session::flash('message','Insertado Correctamente');
         return Redirect::to('proyecto/create');
     }

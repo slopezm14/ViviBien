@@ -13,7 +13,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                {!!Form::model($relacion,['route'=>['destinosub.update',$relacion->id_tipo_solicitud_subsidio],'method'=>'PUT'])!!}
+                {!!Form::model($destinos,['route'=>['destinosub.update',$destinos->id_tipo_solicitud_subsidio],'method'=>'PUT'])!!}
                     {!!Form::label('Descripción del Tipo de Subsidio')!!}
                     {!!Form::text('descripcion', null,['class'=>'form-control', 'placeholder'=>'Descripción del Tipo de Subsidio'])!!}
                     {!! $errors->first('descripcion','<span class="help-block">:message</span>') !!}

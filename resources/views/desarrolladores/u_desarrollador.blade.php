@@ -4,7 +4,7 @@
 
 <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Municipios</h1>
+            <h1 class="page-header">Desar</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -13,7 +13,8 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                 {{-- {!!Form::open(['route'=>'#','id'=>'contact', 'method'=>'GET'])!!}  --}}
+           
+            {!!Form::model($desarrolladores,['route'=>['desarrollador.update',$desarrolladores->id_desarrollador],'method'=>'PUT'])!!}
 
                     {!!Form::label('Nombre del Desarrollador')!!}
                     {!!Form::text('nombre_desarrollador', null,['class'=>'form-control', 'placeholder'=>'Nombre del Desarrollador'])!!}
@@ -46,7 +47,7 @@
                     {!!Form::select('id_ttelefono2', $tipotelefonos,null, ['class' => 'form-control']) !!}
 
                         {!!Form::label('Telefono3')!!}
-                    {!!Form::text('Num_Tel3',$telefono[2]->numero_telefono, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 3'] )!!}
+                    {!!Form::text('Num_Tel3',null, ['class'=>'form-control', 'placeholder'=>'Numero Telefono 3'] )!!}
                     {!! $errors->first('Num_Tel','<span class="help-block">:message</span>') !!}
 
                     {!!Form::label('Tipo Telefono')!!}

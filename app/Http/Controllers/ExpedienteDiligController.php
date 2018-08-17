@@ -37,6 +37,14 @@ class ExpedienteDiligController extends Controller
     {
         //
 
+        \ViviBien\bitacora::create([
+            'id_usuario'=>auth()->user()->id,
+            'objeto'=>'tb_expediente_diligencia',
+            'fecha_accion'=>\Carbon\Carbon::now(),
+            'direccion_ip'=>'127.0.0.1',
+            'nombre_computadora'=>gethostname(),
+            'id_accion'=>1,
+        ]);
 
         
         

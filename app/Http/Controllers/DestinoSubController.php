@@ -5,7 +5,7 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\destino_subsidio;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use Session;
@@ -29,7 +29,8 @@ class DestinoSubController extends Controller
         ->get();
 
         //Retorna la información en esta vista.
-        return view('cat_destino.d_destino_sub', array('destinos'=> $destinos));
+        return view('cat_destino_sub.d_destino_sub', array('destinos'=> $destinos));
+    
     }
 
     /**
@@ -50,12 +51,22 @@ class DestinoSubController extends Controller
      */
     public function store(Request $request)
     {
+      
+
         \ViviBien\destino_subsidio::create([
             'descripcion'=>$request['descripcion'],
         ]);
 
         
 
+        \ViviBien\bitacora::create([
+            'id_usuario'=>auth()->user()->id,
+            'objeto'=>'tb_cat_destino_subsidio',
+            'fecha_accion'=>\Carbon\Carbon::now(),
+            'direccion_ip'=>'127.0.0.1',
+            'nombre_computadora'=>gethostname(),
+            'id_accion'=>1,
+        ]);
         
     Session::flash('message','Inserción Exitosa!');
     return Redirect::to('/destinosub/create');
@@ -84,7 +95,7 @@ class DestinoSubController extends Controller
         $destinos = DB::table('tb_cat_destino_subsidio')->where('id_tipo_solicitud_subsidio', $id)->first();
 
         //retorna la vista, con la información del registro.
-        return view('cat_ddestino_sub.u_destino_sub',['destinos'=>$destinos]);
+        return view('cat_destino_sub.u_destino_sub',['destinos'=>$destinos]);
     }
 
     /**

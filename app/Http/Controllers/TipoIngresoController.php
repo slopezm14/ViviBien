@@ -54,7 +54,14 @@ class TipoIngresoController extends Controller
             'descripcion_ingreso'=>$request['descripcion_ingreso'],
         ]);
 
-           
+        \ViviBien\bitacora::create([
+            'id_usuario'=>auth()->user()->id,
+            'objeto'=>'tb_tipoaccion',
+            'fecha_accion'=>\Carbon\Carbon::now(),
+            'direccion_ip'=>'127.0.0.1',
+            'nombre_computadora'=>gethostname(),
+            'id_accion'=>1,
+        ]);
         
         Session::flash('message','Insertado Correctamente');
         return Redirect::to('tipoingreso/create');

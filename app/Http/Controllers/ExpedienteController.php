@@ -44,7 +44,15 @@ class ExpedienteController extends Controller
     {
         //
 
-        
+        \ViviBien\bitacora::create([
+            'id_usuario'=>auth()->user()->id,
+            'objeto'=>'tb_expediente',
+            'fecha_accion'=>\Carbon\Carbon::now(),
+            'direccion_ip'=>'127.0.0.1',
+            'nombre_computadora'=>gethostname(),
+            'id_accion'=>1,
+        ]);
+
         
     Session::flash('message','Inserción Exitosa!');
     return Redirect::to('/expediente/create');

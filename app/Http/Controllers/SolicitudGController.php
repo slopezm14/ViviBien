@@ -57,6 +57,8 @@ class SolicitudGController extends Controller
         
 
         $numero = (integer)$request['numero'];
+
+        $dilis = DB::table('tb_cat_diligencias')->select('id_diligencia')->count();
         //Ingreso de la persona involucrada
         //Ingreso de Expediente
         
@@ -119,6 +121,16 @@ class SolicitudGController extends Controller
                 'status'=>'I',
             ]);
             
+            for($x=0; $x<$dilis; $x++){
+                \ViviBien\diligencia::create([
+                    'id_expediente'=>$expediente[0]->id_expediente,
+                    'id_diligencia'=>$diligencia[$x]->id_diligencia,
+                    'fecha_diligencia'=>$request['fecha_registro'],
+                    'diligencia_finalizada'=>'N',
+                    'resultado_diligencia'=>'No Comple'
+                ]);
+            }
+
             //dd($solicitante[0][0]->id_solicitante);
 
             $expediente = DB::select('select id_expediente from tb_expediente where id_proyecto = :id_proyecto AND anio_expediente
@@ -179,6 +191,10 @@ class SolicitudGController extends Controller
         Session::flash('message','Faltan Requisitos, no insertado');
         return Redirect::to('/second');
     }
+
+    
+ 
+
     Session::flash('message','Todo Bien');
         return Redirect::to('/second');
 

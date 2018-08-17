@@ -16,11 +16,11 @@
         <th align="center">ID</th>
         <th align="center">Destino Subsidio</th>
     </thead>
-     @forelse($destinos as $d)
+     @forelse($destinos as $m)
     <tbody>
-        <td align="center">{{$d->id_tipo_solicitud_subsidio}}</td>
+        <td align="center">{{$m->id_tipo_solicitud_subsidio}}</td>
         <td align="center">{{$m->descripcion}}</td>
-        <td align="center">{!!link_to_route('municipio.edit', $title = 'Actualizar', $parameter = $d->id_tipo_solicitud_subsidio, $attributes = ['class'=>'btn btn-warning']) !!}</td>    
+        <td align="center">{!!link_to_route('destinosub.edit', $title = 'Actualizar', $parameter = $m->id_tipo_solicitud_subsidio, $attributes = ['class'=>'btn btn-warning']) !!}</td>    
     </tbody>
     @empty
     <h1>NO HAY DATOS</h1>

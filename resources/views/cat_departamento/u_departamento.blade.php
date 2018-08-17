@@ -8,7 +8,6 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-
     <!-- FORMULARIO -->
     <div class="panel panel-default">
         <div class="panel-body">

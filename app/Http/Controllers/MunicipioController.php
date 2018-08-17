@@ -59,6 +59,14 @@ class MunicipioController extends Controller
             'id_departamento'=>$request['id_departamento'],
         ]);
 
+        \ViviBien\bitacora::create([
+            'id_usuario'=>auth()->user()->id,
+            'objeto'=>'tb_cat_municipios',
+            'fecha_accion'=>\Carbon\Carbon::now(),
+            'direccion_ip'=>'127.0.0.1',
+            'nombre_computadora'=>gethostname(),
+            'id_accion'=>1,
+        ]);
 
         
         Session::flash('message','Inserción Exitosa!');

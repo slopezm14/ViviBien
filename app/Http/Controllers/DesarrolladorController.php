@@ -90,7 +90,14 @@ class DesarrolladorController extends Controller
         }
 
 
-
+        \ViviBien\bitacora::create([
+            'id_usuario'=>auth()->user()->id,
+            'objeto'=>'tb_desarrolladores',
+            'fecha_accion'=>\Carbon\Carbon::now(),
+            'direccion_ip'=>'127.0.0.1',
+            'nombre_computadora'=>gethostname(),
+            'id_accion'=>1,
+        ]);
 
 
         
@@ -118,7 +125,7 @@ class DesarrolladorController extends Controller
      */
     public function edit($id)
     {
-        $desarrollador = DB::table('tb_desarrolladores')->where('id_desarrollador', $id)->first();
+        $desarrolladores = DB::table('tb_desarrolladores')->where('id_desarrollador', $id)->first();
 
         $tipotelefonos = tipostelefono::pluck('descripcion_tipotelefono','id_tipotelefono');
 
@@ -128,7 +135,7 @@ class DesarrolladorController extends Controller
         ->where('t.id_desarrollador', $id)
         ->get();
 
-        return view('desarrolladores.u_desarrollador',array('desarrollador'=>$desarrollador,'tipotelefonos'=>$tipotelefonos,'telefono'=>$telefono));
+        return view('desarrolladores.u_desarrollador',array('desarrolladores'=>$desarrolladores,'tipotelefonos'=>$tipotelefonos,'telefono'=>$telefono));
     }
 
     /**
