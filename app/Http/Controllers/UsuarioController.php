@@ -11,7 +11,6 @@ use ViviBien\unidad_trabajo;
 use ViviBien\genero;
 use Illuminate\Support\Facades\DB;
 use ViviBien\User;
-
 class UsuarioController extends Controller
 {
     public function __construct()

@@ -43,6 +43,11 @@ class ExpedienteController extends Controller
     public function store(Request $request)
     {
         //
+
+        
+        
+    Session::flash('message','Inserción Exitosa!');
+    return Redirect::to('/departamento/create');
     }
 
     /**

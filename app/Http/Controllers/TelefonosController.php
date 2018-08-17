@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Redirect;
 class TelefonosController extends Controller
 {
     /**
@@ -23,6 +24,11 @@ class TelefonosController extends Controller
 
         //Retorna la información en esta vista.
         return view('telefonos.d_telefonos', array('telefonos'=> $telefonos));
+
+        
+        
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('proyecto/create');
     }
 
     /**

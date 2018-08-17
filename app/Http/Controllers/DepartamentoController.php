@@ -7,6 +7,7 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\cat_departamento;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use Session;
 use Redirect;
@@ -63,7 +64,7 @@ class DepartamentoController extends Controller
             'id_usuario'=>auth()->user()->id,
             'objeto'=>'tb_cat_departamento',
             'fecha_accion'=>\Carbon\Carbon::now(),
-            'direccion_ip'=>$request->ip(),
+            'direccion_ip'=>'127.0.0.1',
             'nombre_computadora'=>gethostname(),
             'id_accion'=>1,
         ]);

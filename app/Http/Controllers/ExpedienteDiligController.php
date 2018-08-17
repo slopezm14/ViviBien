@@ -3,7 +3,8 @@
 namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Session;
+use Redirect;
 class ExpedienteDiligController extends Controller
 {
     /**
@@ -35,6 +36,12 @@ class ExpedienteDiligController extends Controller
     public function store(Request $request)
     {
         //
+
+
+        
+        
+    Session::flash('message','Inserción Exitosa!');
+    return Redirect::to('/departamento/create');
     }
 
     /**

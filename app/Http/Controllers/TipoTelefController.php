@@ -7,7 +7,8 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\tipostelefono;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Redirect;
 class TipoTelefController extends Controller
 {
     public function __construct()
@@ -50,6 +51,9 @@ class TipoTelefController extends Controller
         \ViviBien\tipostelefono::create([
             'descripcion_tipotelefono'=>$request['tipo_telefono'],
         ]);
+
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('proyecto/create');
     }
 
     /**

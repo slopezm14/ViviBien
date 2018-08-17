@@ -7,7 +7,8 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\tipo_ingreso;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Redirect;
 
 class TipoIngresoController extends Controller
 {
@@ -52,6 +53,11 @@ class TipoIngresoController extends Controller
         \ViviBien\tipo_ingreso::create([
             'descripcion_ingreso'=>$request['descripcion_ingreso'],
         ]);
+
+           
+        
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('proyecto/create');
     }
 
     /**

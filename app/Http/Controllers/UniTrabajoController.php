@@ -7,7 +7,8 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\unidad_trabajo;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Redirect;
 class UniTrabajoController extends Controller
 {
     public function __construct()
@@ -50,6 +51,9 @@ class UniTrabajoController extends Controller
         \ViviBien\unidad_trabajo::create([
             'descripcion_unidad'=>$request['descripcion_unidad'],
         ]);
+
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('proyecto/create');
     }
 
     /**

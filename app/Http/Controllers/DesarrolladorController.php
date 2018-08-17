@@ -9,7 +9,8 @@ use ViviBien\desarrollador;
 use ViviBien\telefono;
 use ViviBien\tipostelefono;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Redirect;
 
 class DesarrolladorController extends Controller
 {
@@ -87,7 +88,16 @@ class DesarrolladorController extends Controller
                 'id_tipotelefono'=>$request['tipotelefono3']
             ]);
         }
+
+
+
+
+
+        
+    Session::flash('message','Inserción Exitosa!');
+    return Redirect::to('/departamento/create');
     }
+
 
     /**
      * Display the specified resource.

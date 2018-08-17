@@ -7,7 +7,8 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\tipoaccion;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Redirect;
 class TipoAccionController extends Controller
 {
     public function __construct()
@@ -50,6 +51,11 @@ class TipoAccionController extends Controller
         \ViviBien\tipoaccion::create([
             'descripcion_accion'=>$request['descripAccion'],
         ]);
+
+           
+        
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('proyecto/create');
     }
 
     /**

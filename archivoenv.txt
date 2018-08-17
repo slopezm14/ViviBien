@@ -8,7 +8,7 @@ APP_URL=http://localhost
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=db_vivibien
+DB_DATABASE=db_vivebien
 DB_USERNAME=root
 DB_PASSWORD=
 

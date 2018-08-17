@@ -7,7 +7,8 @@ use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
 use ViviBien\relacion_familiar;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Redirect;
 class RelacionFamController extends Controller
 {
     public function __construct()
@@ -50,6 +51,10 @@ class RelacionFamController extends Controller
         \ViviBien\relacion_familiar::create([
             'descripcion'=>$request['descripcion'],
         ]);
+
+        
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('proyecto/create');
     }
 
     /**

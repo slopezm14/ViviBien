@@ -9,7 +9,8 @@ use ViviBien\roles;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
+use Session;
+use Redirect;
 class RolController extends Controller
 {
     public function __construct()
@@ -52,6 +53,11 @@ class RolController extends Controller
         $role = Role::create(['name' => $request['descripcion_rol']]);
 
         return back();
+
+        
+        
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('proyecto/create');
     }
 
     /**

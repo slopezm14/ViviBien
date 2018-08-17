@@ -8,7 +8,8 @@ use ViviBien\Http\Controllers\Controller;
 use ViviBien\cat_departamento;
 use ViviBien\cat_municipio;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Redirect;
 class MunicipioController extends Controller
 {
     public function __construct()
@@ -58,6 +59,10 @@ class MunicipioController extends Controller
             'id_departamento'=>$request['id_departamento'],
         ]);
 
+
+        
+        Session::flash('message','Inserción Exitosa!');
+        return Redirect::to('/departamento/create');
     }
 
     /**

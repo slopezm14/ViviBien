@@ -4,7 +4,8 @@ namespace ViviBien\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Redirect;
 
 class GeneroController extends Controller
 {
@@ -59,6 +60,9 @@ class GeneroController extends Controller
     public function show($id)
     {
         //
+
+        Session::flash('message','Inserción Exitosa!');
+        return Redirect::to('/departamento/create');
     }
 
     /**

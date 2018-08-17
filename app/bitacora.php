@@ -10,7 +10,7 @@ class bitacora extends Model
 
     protected $primaryKey = 'id_bitacora';
 
-    protected $fillable = ['objeto','dato_anterior','nuevo_dato','fecha_accion',
+    protected $fillable = ['id_usuario','objeto','dato_anterior','nuevo_dato','fecha_accion',
     'direccionIP','nombre_computadora','id_accion'];
 
     public $timestamps = true;

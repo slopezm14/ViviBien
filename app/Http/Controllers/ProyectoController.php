@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use ViviBien\Http\Middleware\CheckRoles;
 
 
+
 class ProyectoController extends Controller
 {
 

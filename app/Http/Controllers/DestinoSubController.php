@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
+use Session;
+use Redirect;
+
 class DestinoSubController extends Controller
 {
     public function __construct()
@@ -50,6 +53,13 @@ class DestinoSubController extends Controller
         \ViviBien\destino_subsidio::create([
             'descripcion'=>$request['descripcion'],
         ]);
+
+        
+
+        
+    Session::flash('message','Inserción Exitosa!');
+    return Redirect::to('/departamento/create');
+
     }
 
     /**

@@ -8,6 +8,8 @@ use ViviBien\Http\Controllers\Controller;
 use ViviBien\requisito;
 use ViviBien\tipo_ingreso;
 use Illuminate\Support\Facades\DB;
+use Session;
+use Redirect;
 
 class RequisitoController extends Controller
 {
@@ -55,6 +57,10 @@ class RequisitoController extends Controller
             'observaciones'=>$request['observaciones'],
             'obligatorio'=>$request['obligatorio'],
         ]);
+
+        
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('proyecto/create');
     }
 
     /**
