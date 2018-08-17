@@ -58,7 +58,7 @@ class DestinoSubController extends Controller
 
         
     Session::flash('message','Inserción Exitosa!');
-    return Redirect::to('/departamento/create');
+    return Redirect::to('/destinosub/create');
 
     }
 

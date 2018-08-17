@@ -53,7 +53,7 @@ class UniTrabajoController extends Controller
         ]);
 
         Session::flash('message','Insertado Correctamente');
-        return Redirect::to('proyecto/create');
+        return Redirect::to('unidadtrabajo/create');
     }
 
     /**

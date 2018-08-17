@@ -1,7 +1,7 @@
 <?php
 
 namespace ViviBien\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use ViviBien\Http\Requests;
 use ViviBien\Http\Controllers\Controller;
@@ -95,7 +95,7 @@ class DesarrolladorController extends Controller
 
         
     Session::flash('message','Inserción Exitosa!');
-    return Redirect::to('/departamento/create');
+    return Redirect::to('/desarrollador/create');
     }
 
 

@@ -27,8 +27,7 @@ class TelefonosController extends Controller
 
         
         
-        Session::flash('message','Insertado Correctamente');
-        return Redirect::to('proyecto/create');
+  
     }
 
     /**
@@ -50,6 +49,9 @@ class TelefonosController extends Controller
     public function store(Request $request)
     {
         //
+
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('telefono/create');
     }
 
     /**

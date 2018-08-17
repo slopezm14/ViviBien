@@ -41,7 +41,7 @@ class ExpedienteDiligController extends Controller
         
         
     Session::flash('message','Inserción Exitosa!');
-    return Redirect::to('/departamento/create');
+    return Redirect::to('/expdili/create');
     }
 
     /**

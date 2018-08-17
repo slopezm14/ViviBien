@@ -11,6 +11,8 @@ use ViviBien\unidad_trabajo;
 use ViviBien\genero;
 use Illuminate\Support\Facades\DB;
 use ViviBien\User;
+use Session;
+use Redirect;
 class UsuarioController extends Controller
 {
     public function __construct()
@@ -72,7 +74,8 @@ class UsuarioController extends Controller
 
         //Para multiples roles
         //$user->assignRole('Basico', 'Recepcion','Jefatura','Financiero','Social','Juridico','Superusuario');
-        
+        Session::flash('message','Insertado Correctamente');
+        return Redirect::to('unidadtrabajo/create');
     }
 
     /**

@@ -49,6 +49,10 @@ class GeneroController extends Controller
         \ViviBien\genero::create([
             'descripcion_genero'=>$request['genero'],
         ]);
+
+        
+        Session::flash('message','Inserción Exitosa!');
+        return Redirect::to('/genero/create');
     }
 
     /**
@@ -61,8 +65,6 @@ class GeneroController extends Controller
     {
         //
 
-        Session::flash('message','Inserción Exitosa!');
-        return Redirect::to('/departamento/create');
     }
 
     /**

@@ -60,7 +60,7 @@ class RequisitoController extends Controller
 
         
         Session::flash('message','Insertado Correctamente');
-        return Redirect::to('proyecto/create');
+        return Redirect::to('requisito/create');
     }
 
     /**
