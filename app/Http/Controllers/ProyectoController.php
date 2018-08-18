@@ -62,9 +62,16 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
+        /*
         $validado = $this->validate($request,[
+            'id_municipio' => 'required|max:500',
+            'id_desarrollador' => 'required|max:500',
+            'nombre_proyecto' => 'required|max:100',
+            'longitud_proyecto' => 'required|max:50',
+            'latitud_proyecto' => 'required|max:50',
+            'monto_aproximado_proyecto' => 'required|max:100',
             'fecha_inicio_trabajos' => 'required|date|after:today',
-            ]);
+            ]);*/
 
         \ViviBien\proyectos::create([
             'id_municipio'=>$request['id_municipio_proyecto'],
@@ -81,12 +88,12 @@ class ProyectoController extends Controller
             'id_usuario'=>auth()->user()->id,
             'objeto'=>'tb_cat_proyectos',
             'fecha_accion'=>\Carbon\Carbon::now(),
-            'direccion_ip'=>'127.0.0.1',
+            'direccionIP'=>$request->ip(),
             'nombre_computadora'=>gethostname(),
             'id_accion'=>1,
         ]);
 
-        Session::flash('message','Insertado Correctamente');
+        Session::flash('message','Insertado Correctamente!');
         return Redirect::to('proyecto/create');
     }
 

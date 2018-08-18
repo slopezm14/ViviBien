@@ -1,3 +1,10 @@
+<?php if(Session::has('message')): ?>
+<div class="alert alert-info alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <?php echo e(Session::get('message')); ?>
+
+</div>
+<?php endif; ?>
 <?php $__env->startSection('content'); ?>
 
 <div class="row">

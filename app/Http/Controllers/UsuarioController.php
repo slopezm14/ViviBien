@@ -56,6 +56,19 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        /*
+        $validado = $this->validate($request,[
+            'email' => 'required|max:100',
+            'name' => 'required|max:50',
+            'nombre2' => 'required|max:50',
+            'apellido1' => 'required|max:50',
+            'apellido2' => 'required|max:50',
+            'estatus' => 'required|max:25',
+            'password' => 'required|max:25',
+           
+            ]);
+*/
+
         $user=User::create([
             'email'=>$request['usuario'],
             'id_unidad_trabajo'=>$request['id_unidad'],
@@ -80,13 +93,13 @@ class UsuarioController extends Controller
             'id_usuario'=>auth()->user()->id,
             'objeto'=>'users',
             'fecha_accion'=>\Carbon\Carbon::now(),
-            'direccion_ip'=>'127.0.0.1',
+            'direccionIP'=>$request->ip(),
             'nombre_computadora'=>gethostname(),
             'id_accion'=>1,
         ]);
 
-        Session::flash('message','Insertado Correctamente');
-        return Redirect::to('unidadtrabajo/create');
+        Session::flash('message','Insertado Correctamente!');
+        return Redirect::to('usuario/create');
     }
 
     /**

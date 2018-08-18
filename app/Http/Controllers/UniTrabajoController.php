@@ -48,6 +48,12 @@ class UniTrabajoController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $validado = $this->validate($request,[
+            'descripcion_unidad' => 'required|max:100',
+            ]);
+
         \ViviBien\unidad_trabajo::create([
             'descripcion_unidad'=>$request['descripcion_unidad'],
         ]);
@@ -57,7 +63,7 @@ class UniTrabajoController extends Controller
             'id_usuario'=>auth()->user()->id,
             'objeto'=>'tb_unidad_trabajo',
             'fecha_accion'=>\Carbon\Carbon::now(),
-            'direccion_ip'=>'127.0.0.1',
+            'direccionIP'=>$request->ip(),
             'nombre_computadora'=>gethostname(),
             'id_accion'=>1,
         ]);

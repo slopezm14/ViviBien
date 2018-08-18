@@ -48,6 +48,11 @@ class RelacionFamController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validado = $this->validate($request,[
+            'descripcion' => 'required|max:100',
+            ]);
+
         \ViviBien\relacion_familiar::create([
             'descripcion'=>$request['descripcion'],
         ]);
@@ -56,7 +61,7 @@ class RelacionFamController extends Controller
             'id_usuario'=>auth()->user()->id,
             'objeto'=>'tb_cat_relacion_familiar',
             'fecha_accion'=>\Carbon\Carbon::now(),
-            'direccion_ip'=>'127.0.0.1',
+            'direccionIP'=>$request->ip(),
             'nombre_computadora'=>gethostname(),
             'id_accion'=>1,
         ]);

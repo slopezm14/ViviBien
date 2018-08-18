@@ -8,7 +8,8 @@ use ViviBien\Http\Controllers\Controller;
 use ViviBien\categoriadili;
 use ViviBien\unidad_trabajo;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Redirect;
 class CateDiliController extends Controller
 {
     /**
@@ -44,6 +45,16 @@ class CateDiliController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validado = $this->validate($request,[
+            'id_unidad_trabajo' => 'required|max:50',
+            'descripcion_diligencia' => 'required|max:150',
+            'direccion_empresa' => 'required|max:100',
+            'obligatoria' => 'required|max:2',
+            'orden' => 'required|max:50',
+
+            ]);
+
         \ViviBien\categoriadili::create([
             'id_unidad_trabajo'=>$request['id_unidad_trabajo'],
             'descripcion_diligencia'=>$request['descripcion_diligencia'],
@@ -51,6 +62,19 @@ class CateDiliController extends Controller
             'orden'=>$request['orden'],
             
         ]);
+
+        \ViviBien\bitacora::create([
+            'id_usuario'=>auth()->user()->id,
+            'objeto'=>'tb_cat_diligencias',
+            'fecha_accion'=>\Carbon\Carbon::now(),
+            'direccionIP'=>$request->ip(),
+            'nombre_computadora'=>gethostname(),
+            'id_accion'=>1,
+        ]);
+
+        Session::flash('message','Inserción Exitosa!');
+        return Redirect::to('/departamento/create');
+
     }
 
     /**

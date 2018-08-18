@@ -51,6 +51,13 @@ class RequisitoController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validado = $this->validate($request,[
+            'descripcion_requisito' => 'required|max:100',
+            'observaciones' => 'required|max:100',
+            ]);
+
+
         \ViviBien\requisito::create([
             'id_tipo_ingreso'=>$request['id_tipo_ingreso'],
             'descripcion_requisito'=>$request['descripcion_requisito'],
@@ -63,7 +70,7 @@ class RequisitoController extends Controller
             'id_usuario'=>auth()->user()->id,
             'objeto'=>'tb_expediente_requisitos',
             'fecha_accion'=>\Carbon\Carbon::now(),
-            'direccion_ip'=>'127.0.0.1',
+            'direccionIP'=>$request->ip(),
             'nombre_computadora'=>gethostname(),
             'id_accion'=>1,
         ]);

@@ -48,6 +48,12 @@ class TipoAccionController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validado = $this->validate($request,[
+            'descripcion_accion' => 'required|max:100',
+         
+            ]);
+
         \ViviBien\tipoaccion::create([
             'descripcion_accion'=>$request['descripAccion'],
         ]);
@@ -57,7 +63,7 @@ class TipoAccionController extends Controller
             'id_usuario'=>auth()->user()->id,
             'objeto'=>'tb_tipoaccion',
             'fecha_accion'=>\Carbon\Carbon::now(),
-            'direccion_ip'=>'127.0.0.1',
+            'direccionIP'=>$request->ip(),
             'nombre_computadora'=>gethostname(),
             'id_accion'=>1,
         ]);

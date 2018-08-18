@@ -53,6 +53,17 @@ class DesarrolladorController extends Controller
      */
     public function store(Request $request)
     {
+       
+        $validado = $this->validate($request,[
+            'nombre_desarrollador' => 'required|max:50',
+            'nit' => 'required|max:10',
+            'direccion_empresa' => 'required|max:100',
+            'correo_electronico' => 'required|email',
+            'nombre_owner' => 'required|max:100',
+
+            ]);
+    
+
         \ViviBien\desarrollador::create([
             'nombre_desarrollador'=>$request['nombre_desarrollador'],
             'nit'=>$request['nit'],
@@ -94,7 +105,7 @@ class DesarrolladorController extends Controller
             'id_usuario'=>auth()->user()->id,
             'objeto'=>'tb_desarrolladores',
             'fecha_accion'=>\Carbon\Carbon::now(),
-            'direccion_ip'=>'127.0.0.1',
+            'direccionIP'=>$request->ip(),
             'nombre_computadora'=>gethostname(),
             'id_accion'=>1,
         ]);
