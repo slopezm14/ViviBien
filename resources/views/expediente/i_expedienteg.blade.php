@@ -42,7 +42,7 @@
                  {!! $errors->first('monto_solicitado','<span class="help-block">:message</span>') !!}
 
                  {!!Form::label('Num. Expediente')!!}
-                 {!!Form::number('numero_expediente', null,['class'=>'form-control', 'placeholder'=>'Latitud del Proyecto'])!!}
+                 {!!Form::number('numero_expediente', $num,['class'=>'form-control', 'disabled' => 'disabled', 'placeholder'=>'Num. de Expediente'])!!}
                  {!! $errors->first('numero_expediente','<span class="help-block">:message</span>') !!}
 
                  {!!Form::label('Año Expediente')!!}

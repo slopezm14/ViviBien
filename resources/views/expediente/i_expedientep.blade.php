@@ -40,16 +40,8 @@
                     {!!Form::number('monto_solicitado', null,['class'=>'form-control', 'placeholder'=>'Monto'])!!}
                     {!! $errors->first('monto_solicitado','<span class="help-block">:message</span>') !!}
 
-                    {!!Form::label('Longitud')!!}
-                    {!!Form::number('longitud_proyecto', null,['class'=>'form-control', 'placeholder'=>'Longitud del Proyecto'])!!}
-                    {!! $errors->first('longitud_proyecto','<span class="help-block">:message</span>') !!}
-
-                    {!!Form::label('Latitud')!!}
-                    {!!Form::number('latitud_proyecto', null,['class'=>'form-control', 'placeholder'=>'Latitud del Proyecto'])!!}
-                    {!! $errors->first('latitud_proyecto','<span class="help-block">:message</span>') !!}
-
                     {!!Form::label('Num. Expediente')!!}
-                    {!!Form::number('numero_expediente', null,['class'=>'form-control', 'placeholder'=>'Latitud del Proyecto'])!!}
+                    {!!Form::number('numero_expediente', $num,['class'=>'form-control', 'disabled' => 'disabled', 'placeholder'=>'Numero de Expediente'])!!}
                     {!! $errors->first('numero_expediente','<span class="help-block">:message</span>') !!}
 
                     {!!Form::label('Año Expediente')!!}

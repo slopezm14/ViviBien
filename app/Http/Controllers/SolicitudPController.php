@@ -42,9 +42,12 @@ class SolicitudPController extends Controller
         $genero = genero::pluck('id_generos','descripcion_genero');
         $relacion = relacion_familiar::pluck('descripcion','id_relacion_familiar');
         $destino = destino_subsidio::pluck('descripcion','id_tipo_solicitud_subsidio');
+
+        $numerito_temp = DB::table('tb_expediente')->select('numero_expediente')->orderBy('numero_expediente', 'desc')->first();
+        $num = $numerito_temp->numero_expediente+1;
         
-        return view('expediente.i_expedientep',['requisitos'=>$requisitos,'destino'=>$destino,
-        'genero'=>$genero,'proyecto'=>$proyecto,'relacion'=>$relacion]);
+        return view('expediente.i_expedientep',compact('requisitos','destino',
+        'genero','proyecto','relacion','num'));
     }
 
     /**
@@ -118,9 +121,7 @@ class SolicitudPController extends Controller
                 'numero_expediente'=>$request['numero_expediente'],
                 'status'=>'I',
             ]);
-            
-            //
-            
+                      
             
 
             $expediente = DB::select('select id_expediente from tb_expediente where id_proyecto = :id_proyecto AND anio_expediente

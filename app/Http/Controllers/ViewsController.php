@@ -34,6 +34,10 @@ class ViewsController extends Controller
     }
 
     public function second(Request $request){
+
+        $numerito_temp = DB::table('tb_expediente')->select('numero_expediente')->orderBy('numero_expediente', 'desc')->first();
+        $num = $numerito_temp->numero_expediente+1;
+
         $holi = $request['numero'];
 
         $requisitos = DB::table('tb_requisitos as r')
@@ -45,7 +49,7 @@ class ViewsController extends Controller
         $relacion = relacion_familiar::pluck('descripcion','id_relacion_familiar');
         $destino = destino_subsidio::pluck('descripcion','id_tipo_solicitud_subsidio');
 
-        return view('expediente.i_expedienteg',compact('holi','proyecto','relacion','destino','genero','requisitos'));
+        return view('expediente.i_expedienteg',compact('holi','proyecto','relacion','destino','genero','requisitos','num'));
     }
 
     public function chose(){
@@ -55,17 +59,25 @@ class ViewsController extends Controller
 
     public function list(Request $request){
         $choose = $request['choose'];
+        
         $status = DB::table('tb_expediente as e')
         ->select('e.status')
         ->join('tb_cat_proyectos as p','p.id_proyecto','e.id_proyecto')
         ->where('e.id_proyecto',$choose)->get();
 
+        if(count($status) == 0)
+        {
+            Session::flash('message','No hay diligencias');
+        return Redirect::to('chose');
+        }
+        
         // $conteo = DB::table('users as us')
         //  ->select('d.id_diligencia')
         //  ->join('tb_unidad_trabajo as u','u.id_unidad_trabajo','us.id_unidad_trabajo')
         // ->join('tb_cat_diligencias as d','d.id_unidad_trabajo','u.id_unidad_trabajo')
         // ->join('tb_expediente_diligencia as e','e.id_diligencia','d.id_diligencia')
         // ->where('us.id',auth()->user()->id)->where('e.diligencia_finalizada','N')->count();
+        
 
         
 
@@ -75,6 +87,8 @@ class ViewsController extends Controller
         ->where('us.id',auth()->user()->id)->get();
 
         $hidden = 'x';
+        
+        $flag = 0;
         if($status[0]->status == 'I' and $unidad[0]->descripcion_unidad == 'Social'){
 
             $diligencias = DB::table('tb_cat_diligencias as dili')
@@ -86,9 +100,11 @@ class ViewsController extends Controller
             ->where('e.id_proyecto',$choose)
             ->where('ed.diligencia_finalizada','N')->get();
             $hidden = 'J';
-
+            $request->session()->put('hidden', $hidden);
+            $request->session()->put('choose', $choose);
+            $flag = 1;
         }
-        if($status[0]->status == 'J' AND $unidad[0]->descripcion_unidad == 'Juridico' ){
+        else if($status[0]->status == 'J' AND $unidad[0]->descripcion_unidad == 'Juridico' ){
             $diligencias = DB::table('tb_cat_diligencias as dili')
             ->select('dili.id_diligencia','dili.descripcion_diligencia')
             ->join('tb_unidad_trabajo AS ut','ut.id_unidad_trabajo','dili.id_unidad_trabajo')
@@ -98,8 +114,11 @@ class ViewsController extends Controller
             ->where('e.id_proyecto',$choose)
             ->where('ed.diligencia_finalizada','N')->get();
             $hidden = 'F';
+            $request->session()->put('hidden', $hidden);
+            $request->session()->put('choose', $choose);
+            $flag = 1;
         }
-        if($status[0]->status == 'F' AND $unidad[0]->descripcion_unidad == 'Financiero'){
+        else if($status[0]->status == 'F' AND $unidad[0]->descripcion_unidad == 'Financiero'){
             $diligencias = DB::table('tb_cat_diligencias as dili')
             ->select('dili.id_diligencia', 'dili.descripcion_diligencia')
             ->join('tb_unidad_trabajo AS ut','ut.id_unidad_trabajo','dili.id_unidad_trabajo')
@@ -109,10 +128,14 @@ class ViewsController extends Controller
             ->where('e.id_proyecto',$choose)
             ->where('ed.diligencia_finalizada','N')->get();
             $hidden = 'E';
+            $request->session()->put('hidden', $hidden);
+            $request->session()->put('choose', $choose);
+            $flag = 1;
             }
+            
 
         
-        return view('cat_diligencias.list',compact('diligencias','hidden','choose'));
+        return view('cat_diligencias.list',compact('diligencias','hidden','choose','flag'));
     }
 
     public function update(Request $request){
