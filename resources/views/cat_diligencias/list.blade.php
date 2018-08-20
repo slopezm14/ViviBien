@@ -17,15 +17,20 @@
         <th align="center">ID</th>
         <th align="center">Descripcion Diligencias</th>
     </thead>
-     @forelse($diligencias as $d)
-    <tbody>
-        <td align="center">{{$d->id_diligencia}}</td>
-        <td align="center">{{$d->descripcion_diligencia}}</td>
-        <td align="center">{!!link_to_route('expdili.edit', $title = 'Checkear', $parameter = $d->id_diligencia, $attributes = ['class'=>'btn btn-warning']) !!}</td>    
-    </tbody>
-    @empty
-    <h1>NO HAY DATOS</h1>
-    @endforelse() 
+    @if($flag != 0)
+        @forelse($diligencias as $d)
+        <tbody>
+            <td align="center">{{$d->id_diligencia}}</td>
+            <td align="center">{{$d->descripcion_diligencia}}</td>
+            <td align="center">{!!link_to_route('expdili.edit', $title = 'Checkear', $parameter = $d->id_diligencia, $attributes = ['class'=>'btn btn-warning']) !!}</td>    
+        </tbody>
+        @empty
+        <h1>NO HAY DATOS</h1>
+        @endforelse() 
+    @else
+    <h1>NO DILIGENCIAS NOW!</h1>
+    @endif
+    
 </table>
     
 </div>

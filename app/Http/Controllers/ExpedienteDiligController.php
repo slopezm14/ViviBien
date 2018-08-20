@@ -5,6 +5,8 @@ namespace ViviBien\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use Redirect;
+use Illuminate\Support\Facades\DB;
+
 class ExpedienteDiligController extends Controller
 {
     /**
@@ -71,7 +73,9 @@ class ExpedienteDiligController extends Controller
      */
     public function edit($id)
     {
-        
+        $diligencias = DB::table('tb_cat_diligencias')->where('id_diligencia', $id)->first();
+
+        return view('cat_diligencias.dili_edit',array('diligencias'=>$diligencias));
     }
 
     /**
@@ -83,11 +87,12 @@ class ExpedienteDiligController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $hidden = $request['hidden'];
-        $proyecto = $request['choose'];
+        $hidden = $request->session()->get('hidden');
+        $choose = $request->session()->get('choose');
 
         DB::table('tb_expediente')->where('id_proyecto', $choose)->limit(1)
-        ->update(array('status'=>$request['hidden']));
+        ->update(array('status'=>$hidden ));
+
         DB::table('tb_expediente_diligencia')->where('id_diligencia', $id)->limit(1)
         ->update(array('diligencia_finalizada'=>'S'));
     }

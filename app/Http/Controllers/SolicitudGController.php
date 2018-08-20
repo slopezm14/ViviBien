@@ -59,6 +59,7 @@ class SolicitudGController extends Controller
         $numero = (integer)$request['numero'];
 
         $dilis = DB::table('tb_cat_diligencias')->select('id_diligencia')->count();
+        $diligencia = DB::select('select id_diligencia from tb_cat_diligencias');
         //Ingreso de la persona involucrada
         //Ingreso de Expediente
         
@@ -121,15 +122,7 @@ class SolicitudGController extends Controller
                 'status'=>'I',
             ]);
             
-            for($x=0; $x<$dilis; $x++){
-                \ViviBien\diligencia::create([
-                    'id_expediente'=>$expediente[0]->id_expediente,
-                    'id_diligencia'=>$diligencia[$x]->id_diligencia,
-                    'fecha_diligencia'=>$request['fecha_registro'],
-                    'diligencia_finalizada'=>'N',
-                    'resultado_diligencia'=>'No Comple'
-                ]);
-            }
+            
 
             //dd($solicitante[0][0]->id_solicitante);
 
@@ -138,6 +131,16 @@ class SolicitudGController extends Controller
                     ['id_proyecto' => $request['id_proyecto'],'anio_expediente'=>$request['anio_expediente'],
                     'numero_expediente'=>$request['numero_expediente']]);
             
+                    for($x=0; $x<$dilis; $x++){
+                        \ViviBien\diligencia::create([
+                            'id_expediente'=>$expediente[0]->id_expediente,
+                            'id_diligencia'=>$diligencia[$x]->id_diligencia,
+                            'fecha_diligencia'=>$request['fecha_registro'],
+                            'diligencia_finalizada'=>'N',
+                            'resultado_diligencia'=>'No Comple'
+                        ]);
+                    }
+
             //dd($solicitante[0][0]->id_solicitante);
             $exped = array();
                     for($j=1; $j<=$numero; $j++){
@@ -189,14 +192,14 @@ class SolicitudGController extends Controller
     }
     else{
         Session::flash('message','Faltan Requisitos, no insertado');
-        return Redirect::to('/second');
+        return Redirect::to('/first');
     }
 
     
  
 
     Session::flash('message','Todo Bien');
-        return Redirect::to('/second');
+        return Redirect::to('/first');
 
 
 
