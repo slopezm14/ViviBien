@@ -109,14 +109,24 @@
                     <?php echo $errors->first('nombre2','<span class="help-block">:message</span>'); ?>
 
 
+<<<<<<< HEAD
                     <?php echo Form::label('Primer Apellido'); ?>
 
                     <?php echo Form::text('apellido1', null,['class'=>'form-control', 'placeholder'=>'Primer apellido']); ?>
+=======
+                    <?php echo Form::label('Primer Nombre'); ?>
+
+                    <?php echo Form::text('apellido1', null,['class'=>'form-control', 'placeholder'=>'Primer Apellido']); ?>
+>>>>>>> 88528322bfa3c494095653708a0980bdbc210e7c
 
                     <?php echo $errors->first('apellido1','<span class="help-block">:message</span>'); ?>
 
 
+<<<<<<< HEAD
                     <?php echo Form::label('Segundo Apellido'); ?>
+=======
+                    <?php echo Form::label('Segundo Nombre'); ?>
+>>>>>>> 88528322bfa3c494095653708a0980bdbc210e7c
 
                     <?php echo Form::text('apellido2', null,['class'=>'form-control', 'placeholder'=>'Segundo Apellido']); ?>
 
